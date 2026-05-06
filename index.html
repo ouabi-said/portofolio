@@ -1,208 +1,477 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio – Mohamed Saïd Fumilayo OUABI</title>
+  <title>Mohamed Saïd Fumilayo OUABI — Technicien IT & Réseaux</title>
   <style>
-    :root {
-      --primary: #f0f6ff;
-      --accent: #1d4ed8;
-      --accent2: #0891b2;
-      --muted: #64748b;
-      --card: #ffffff;
-      --text: #1e293b;
-      --border: #bfdbfe;
+    :root{--bg:#0a0f1e;--bg2:#0d1526;--card:#111827;--accent:#3b82f6;--accent2:#06b6d4;--text:#e2e8f0;--muted:#64748b;--border:#1e293b}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+
+    nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(10,15,30,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+    .nav-logo{font-weight:900;font-size:1.3rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+    .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--accent)}
+    .nav-contact{background:var(--accent);color:#fff !important;padding:.45rem 1.2rem;border-radius:6px;font-size:.85rem;font-weight:600}
+    .nav-contact:hover{background:#2563eb !important}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+    .hamburger span{width:24px;height:2px;background:var(--text);border-radius:2px}
+
+    #accueil{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem 2rem;background:radial-gradient(ellipse at 20% 50%,rgba(59,130,246,.08),transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(6,182,212,.06),transparent 60%),var(--bg)}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;width:100%}
+    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);color:var(--accent);padding:.4rem 1rem;border-radius:999px;font-size:.78rem;letter-spacing:1px;margin-bottom:1.5rem}
+    .hero-badge::before{content:'';width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.1;margin-bottom:.5rem}
+    .hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .typed-wrapper{font-size:1.2rem;color:var(--accent2);font-weight:600;margin-bottom:1.2rem;min-height:2rem}
+    #typed::after{content:'|';animation:blink .7s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    .hero-desc{color:var(--muted);line-height:1.8;margin-bottom:2rem;font-size:.95rem}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn{padding:.75rem 1.8rem;border-radius:8px;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+    .btn-primary{background:var(--accent);color:#fff;box-shadow:0 4px 20px rgba(59,130,246,.3)}
+    .btn-primary:hover{background:#2563eb;transform:translateY(-2px)}
+    .btn-outline{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+    .btn-outline:hover{background:rgba(59,130,246,.1)}
+    .hero-counters{display:flex;gap:2rem;margin-top:2.5rem;flex-wrap:wrap}
+    .counter .num{font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .counter .lbl{font-size:.75rem;color:var(--muted)}
+    .hero-right{display:flex;justify-content:center}
+    .hero-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;width:300px;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative}
+    .hero-card::before{content:'';position:absolute;inset:-1px;border-radius:20px;background:linear-gradient(135deg,rgba(59,130,246,.3),rgba(6,182,212,.3));z-index:-1;opacity:.5}
+    .hc-avatar{width:80px;height:80px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;color:#fff;margin:0 auto 1rem}
+    .hc-name{text-align:center;font-weight:700;margin-bottom:.3rem}
+    .hc-role{text-align:center;color:var(--accent2);font-size:.82rem;margin-bottom:1.2rem}
+    .hc-tags{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:1.2rem}
+    .hc-tag{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#93c5fd;padding:.2rem .6rem;border-radius:999px;font-size:.72rem}
+    .hc-info{display:flex;flex-direction:column;gap:.5rem}
+    .hc-info-item{display:flex;align-items:center;gap:.6rem;font-size:.82rem;color:var(--muted)}
+
+    section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+    .sec-header{text-align:center;margin-bottom:3.5rem}
+    .sec-label{display:inline-block;color:var(--accent);font-size:.78rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:.8rem}
+    .sec-title{font-size:2rem;font-weight:800}
+    .sec-title span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .sec-sub{color:var(--muted);margin-top:.5rem;font-size:.92rem}
+
+    .full-section{padding:5rem 2rem}
+    .full-section > div{max-width:1100px;margin:0 auto}
+
+    .about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start}
+    .about-avatar{width:100px;height:100px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:1.5rem}
+    .about-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+    .chip{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:var(--accent2);padding:.3rem .8rem;border-radius:999px;font-size:.75rem}
+    .about-exp-badge{background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(6,182,212,.15));border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:1rem;text-align:center}
+    .about-exp-badge .big{font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .about-exp-badge .sm{font-size:.78rem;color:var(--muted)}
+    .about-right h3{font-size:1.5rem;font-weight:800;margin-bottom:1rem}
+    .about-right p{color:var(--muted);line-height:1.9;margin-bottom:1rem;font-size:.93rem}
+    .about-infos{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.5rem}
+    .about-info-item{display:flex;align-items:center;gap:.6rem;font-size:.85rem}
+    .about-info-item .icon{color:var(--accent)}
+    .about-info-item .val{color:var(--muted)}
+    .about-langs{margin-top:1.5rem}
+    .about-langs h4{font-size:.9rem;font-weight:700;margin-bottom:.8rem}
+    .lang-items{display:flex;gap:1rem;flex-wrap:wrap}
+    .lang-item{font-size:.82rem;color:var(--muted)}
+    .interests{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem}
+    .interest-tag{background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);color:var(--accent2);padding:.3rem .8rem;border-radius:999px;font-size:.78rem}
+
+    .skills-filter{display:flex;gap:.5rem;justify-content:center;margin-bottom:2.5rem;flex-wrap:wrap}
+    .filter-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.4rem 1rem;border-radius:999px;font-size:.82rem;cursor:pointer;transition:all .2s}
+    .filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+    .skill-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem}
+    .skill-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem}
+    .skill-name{font-size:.9rem;font-weight:600}
+    .skill-pct{font-size:.82rem;color:var(--accent);font-weight:700}
+    .skill-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+    .skill-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;width:0;transition:width 1.2s ease}
+
+    .tabs{display:flex;gap:1rem;justify-content:center;margin-bottom:2.5rem;flex-wrap:wrap}
+    .tab{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.6rem 2rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+    .tab-content{display:none}
+    .tab-content.active{display:block}
+    .tl{position:relative;padding-left:2rem}
+    .tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2));border-radius:2px}
+    .tli{position:relative;margin-bottom:2.5rem}
+    .tl-dot{position:absolute;left:-2.44rem;top:.4rem;width:12px;height:12px;background:var(--accent);border-radius:50%;border:2px solid var(--bg)}
+    .tlc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:border-color .2s,box-shadow .2s}
+    .tlc:hover{border-color:var(--accent);box-shadow:0 8px 30px rgba(59,130,246,.1)}
+    .tlh{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}
+    .tlt{font-weight:700;font-size:1rem}
+    .tlco{color:var(--accent);font-size:.84rem;margin-top:.15rem}
+    .tld{color:var(--muted);font-size:.78rem;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);padding:.2rem .7rem;border-radius:999px;white-space:nowrap}
+    .tll{list-style:none;margin-top:.8rem}
+    .tll li{color:var(--muted);font-size:.87rem;line-height:1.7;padding-left:1.1rem;position:relative}
+    .tll li::before{content:'→';position:absolute;left:0;color:var(--accent2)}
+    .tl-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
+    .tl-tag{background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2);color:var(--accent2);padding:.15rem .55rem;border-radius:999px;font-size:.7rem}
+
+    /* RÉFÉRENCES */
+    .refs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+    .ref-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.8rem;transition:border-color .2s,box-shadow .2s;position:relative}
+    .ref-card:hover{border-color:var(--accent);box-shadow:0 8px 30px rgba(59,130,246,.1)}
+    .ref-quote{font-size:3rem;color:var(--accent);opacity:.3;line-height:1;margin-bottom:.5rem}
+    .ref-text{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:1.2rem;font-style:italic}
+    .ref-person{display:flex;align-items:center;gap:.8rem}
+    .ref-avatar{width:44px;height:44px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff;flex-shrink:0}
+    .ref-name{font-weight:700;font-size:.9rem}
+    .ref-role{color:var(--accent2);font-size:.78rem}
+    .ref-tel{color:var(--muted);font-size:.75rem;margin-top:.2rem}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start}
+    .contact-info h3{font-size:1.3rem;font-weight:700;margin-bottom:1rem}
+    .contact-info p{color:var(--muted);line-height:1.8;margin-bottom:2rem;font-size:.92rem}
+    .contact-items{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+    .contact-item{display:flex;align-items:center;gap:.8rem;padding:1rem;background:var(--card);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);transition:border-color .2s}
+    .contact-item:hover{border-color:var(--accent)}
+    .contact-item .ico{font-size:1.2rem;width:36px;height:36px;background:rgba(59,130,246,.1);border-radius:8px;display:flex;align-items:center;justify-content:center}
+    .contact-item .info .label{font-size:.72rem;color:var(--muted)}
+    .contact-item .info .val{font-size:.88rem;font-weight:600}
+    .contact-form{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem}
+    .contact-form h3{font-size:1.1rem;font-weight:700;margin-bottom:1.5rem}
+    .form-group{margin-bottom:1.2rem}
+    .form-group label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:.4rem}
+    .form-group input,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s;font-family:inherit}
+    .form-group input:focus,.form-group textarea:focus{border-color:var(--accent)}
+    .form-group textarea{resize:vertical;min-height:120px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .form-submit{width:100%;background:var(--accent);color:#fff;border:none;padding:.85rem;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .form-submit:hover{background:#2563eb;transform:translateY(-1px)}
+
+    footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+    .footer-logo{font-weight:900;font-size:1.1rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .footer-copy{color:var(--muted);font-size:.8rem}
+
+    @media(max-width:768px){
+      .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+      .hero-right{display:none}
+      .hamburger{display:flex}
+      .nav-links{display:none;position:absolute;top:100%;left:0;width:100%;background:var(--bg2);flex-direction:column;padding:1rem 2rem;border-bottom:1px solid var(--border)}
+      .nav-links.open{display:flex}
+      .about-infos{grid-template-columns:1fr}
+      .form-row{grid-template-columns:1fr}
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--primary); color: var(--text); }
-    nav { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); display: flex; justify-content: flex-end; align-items: center; padding: 1rem 2.5rem; border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(29,78,216,.08); }
-    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color .2s; }
-    .nav-links a:hover { color: var(--accent); }
-    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 50%, #f0f9ff 100%); padding: 2rem; text-align: center; }
-    .hero-inner { max-width: 720px; }
-    .badge { display: inline-block; background: rgba(29,78,216,.1); border: 1px solid rgba(29,78,216,.3); color: var(--accent); padding: .35rem 1rem; border-radius: 999px; font-size: .78rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; }
-    h1 { font-size: clamp(2rem,5vw,3.4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; color: var(--text); }
-    h1 span { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero p { color: var(--muted); font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem; }
-    .cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn { padding: .75rem 1.8rem; border-radius: 8px; font-size: .9rem; font-weight: 600; text-decoration: none; transition: all .2s; }
-    .btn-p { background: var(--accent); color: #fff; box-shadow: 0 4px 14px rgba(29,78,216,.3); }
-    .btn-p:hover { background: #1e40af; transform: translateY(-2px); }
-    .btn-o { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
-    .btn-o:hover { background: rgba(29,78,216,.08); }
-    .hero-info { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
-    .hero-info span { color: var(--muted); font-size: .84rem; }
-    section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
-    .bar { width: 50px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; margin-bottom: .8rem; }
-    .stitle { font-size: 1.8rem; font-weight: 800; margin-bottom: .4rem; color: var(--text); }
-    .stitle span { color: var(--accent); }
-    .ssub { color: var(--muted); margin-bottom: 3rem; font-size: .92rem; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-    .about-text p { color: var(--muted); line-height: 1.9; margin-bottom: 1rem; }
-    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .stat { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 8px rgba(29,78,216,.06); }
-    .stat .n { font-size: 2.2rem; font-weight: 900; color: var(--accent); }
-    .stat .l { font-size: .78rem; color: var(--muted); margin-top: .3rem; }
-    .sk-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(255px,1fr)); gap: 1.5rem; }
-    .sk { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: transform .2s,border-color .2s,box-shadow .2s; box-shadow: 0 2px 8px rgba(29,78,216,.05); }
-    .sk:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 8px 24px rgba(29,78,216,.12); }
-    .sk .ico { font-size: 2rem; margin-bottom: .8rem; }
-    .sk h3 { font-size: .95rem; font-weight: 700; margin-bottom: .8rem; color: var(--accent2); }
-    .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
-    .tag { background: #eff6ff; border: 1px solid #bfdbfe; color: var(--accent); padding: .23rem .62rem; border-radius: 999px; font-size: .73rem; }
-    .tl { position: relative; padding-left: 2rem; }
-    .tl::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent2)); border-radius: 2px; }
-    .tli { position: relative; margin-bottom: 2.5rem; }
-    .dot { position: absolute; left: -2.44rem; top: .35rem; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; border: 2px solid var(--primary); }
-    .tlc { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: border-color .2s,box-shadow .2s; box-shadow: 0 2px 8px rgba(29,78,216,.05); }
-    .tlc:hover { border-color: var(--accent); box-shadow: 0 8px 24px rgba(29,78,216,.1); }
-    .tlh { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: .5rem; margin-bottom: .5rem; }
-    .tlt { font-weight: 700; color: var(--text); }
-    .tlco { color: var(--accent); font-size: .84rem; margin-top: .15rem; }
-    .tld { color: var(--muted); font-size: .78rem; background: #eff6ff; padding: .2rem .7rem; border-radius: 999px; white-space: nowrap; border: 1px solid var(--border); }
-    .tll { list-style: none; margin-top: .8rem; }
-    .tll li { color: var(--muted); font-size: .87rem; line-height: 1.7; padding-left: 1.1rem; position: relative; }
-    .tll li::before { content: '→'; position: absolute; left: 0; color: var(--accent2); }
-    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 1.2rem; }
-    .edu { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem; box-shadow: 0 2px 8px rgba(29,78,216,.05); }
-    .edu .deg { font-weight: 700; margin-bottom: .3rem; color: var(--text); }
-    .edu .sch { color: var(--accent2); font-size: .84rem; }
-    .edu .per { color: var(--muted); font-size: .76rem; margin-top: .5rem; }
-    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr)); gap: 1rem; margin-top: 2rem; }
-    .cert { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; display: flex; gap: .8rem; align-items: flex-start; box-shadow: 0 2px 8px rgba(29,78,216,.05); }
-    .ci { font-size: 1.8rem; flex-shrink: 0; }
-    .cert h4 { font-size: .88rem; font-weight: 700; margin-bottom: .2rem; color: var(--text); }
-    .cert p { color: var(--muted); font-size: .76rem; line-height: 1.5; }
-    .cbox { background: linear-gradient(135deg, #eff6ff, #e0f2fe); border: 1px solid var(--border); border-radius: 20px; padding: 3rem; text-align: center; }
-    .cbox p { color: var(--muted); margin-bottom: 2rem; line-height: 1.7; }
-    .clinks { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .cl { display: flex; align-items: center; gap: .5rem; background: #fff; border: 1px solid var(--border); color: var(--text); padding: .75rem 1.3rem; border-radius: 10px; text-decoration: none; font-size: .88rem; transition: all .2s; box-shadow: 0 2px 8px rgba(29,78,216,.06); }
-    .cl:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: .78rem; border-top: 1px solid var(--border); background: #fff; }
-    @media(max-width:700px) { .about-grid { grid-template-columns: 1fr; } nav { padding: 1rem; justify-content: center; } .nav-links { gap: 1rem; font-size: .78rem; } }
   </style>
 </head>
 <body>
 
 <nav>
-  <ul class="nav-links">
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#skills">Compétences</a></li>
-    <li><a href="#experience">Expériences</a></li>
-    <li><a href="#education">Formation</a></li>
+  <div class="nav-logo">OMSF</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#accueil">Accueil</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#experience">Expérience</a></li>
+    <li><a href="#references">Références</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-contact">Me contacter</a></li>
   </ul>
+  <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="badge">💻 Disponible</div>
-    <h1>Mohamed Saïd Fumilayo<br><span>OUABI</span></h1>
-    <p>Technicien Support Informatique & Réseaux Télécoms passionné, Gestionnaire de Projets Technologiques avec une expérience en helpdesk, réseaux mobiles et déploiement d'infrastructures IT.</p>
-    <div class="cta">
-      <a href="#experience" class="btn btn-p">Voir mes expériences</a>
-      <a href="#contact" class="btn btn-o">Me contacter</a>
+<!-- HERO -->
+<section id="accueil">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-badge">Disponible pour missions</div>
+      <h1 class="hero">Mohamed Saïd<br><span>Fumilayo OUABI</span></h1>
+      <div class="typed-wrapper">Je suis <span id="typed"></span></div>
+      <p class="hero-desc">Passionné par l'informatique et les réseaux télécoms, je mets à profit mon expérience terrain pour offrir un support efficace et réactif. Disponible pour toute opportunité au Bénin et à l'international.</p>
+      <div class="hero-btns">
+        <a href="#experience" class="btn btn-primary">Voir mes expériences</a>
+        <a href="#contact" class="btn btn-outline">Travailler ensemble</a>
+      </div>
+      <div class="hero-counters">
+        <div class="counter"><div class="num" data-target="3">0</div><div class="lbl">Ans d'expérience</div></div>
+        <div class="counter"><div class="num" data-target="8">0</div><div class="lbl">Postes occupés</div></div>
+        <div class="counter"><div class="num" data-target="3">0</div><div class="lbl">Certifications</div></div>
+        <div class="counter"><div class="num" data-target="3">0</div><div class="lbl">Langues</div></div>
+      </div>
     </div>
-    <div class="hero-info">
-      <span>📍 Cotonou, Bénin</span>
-      <span>📞 +229 01 96 60 11 58</span>
-      <span>✉️ mouabi6@gmail.com</span>
-      <span>🚗 Permis B</span>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hc-avatar">OMSF</div>
+        <div class="hc-name">Mohamed Saïd F. OUABI</div>
+        <div class="hc-role">Technicien IT & Réseaux Télécoms</div>
+        <div class="hc-tags">
+          <span class="hc-tag">Support N1/N2</span><span class="hc-tag">Réseaux</span>
+          <span class="hc-tag">BTS 4G</span><span class="hc-tag">Active Directory</span>
+        </div>
+        <div class="hc-info">
+          <div class="hc-info-item"><span>📍</span><span>Cotonou, Bénin</span></div>
+          <div class="hc-info-item"><span>🎓</span><span>Master II – Gestion de Projet</span></div>
+          <div class="hc-info-item"><span>✉️</span><span>mouabi6@gmail.com</span></div>
+          <div class="hc-info-item"><span>🚗</span><span>Permis B</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<div id="apropos" class="full-section" style="background:var(--bg2)">
+  <div>
+    <div class="sec-header">
+      <div class="sec-label">À propos</div>
+      <div class="sec-title">Qui <span>suis-je ?</span></div>
+      <p class="sec-sub">Technicien passionné et professionnel engagé au Bénin</p>
+    </div>
+    <div class="about-grid">
+      <div>
+        <div class="about-avatar">OMSF</div>
+        <div class="about-chips">
+          <span class="chip">IT Support</span><span class="chip">Réseaux Télécoms</span>
+          <span class="chip">Helpdesk</span><span class="chip">Bénin 🇧🇯</span>
+        </div>
+        <div class="about-exp-badge">
+          <div class="big">~3 ans</div>
+          <div class="sm">d'expérience cumulée</div>
+        </div>
+      </div>
+      <div class="about-right">
+        <h3>Bonjour 👋, je suis Mohamed Saïd</h3>
+        <p>Technicien support informatique et réseaux télécoms passionné, je mets à profit une expérience terrain solide pour offrir un support efficace et réactif aux utilisateurs.</p>
+        <p>Polyvalent et orienté résultats, j'excelle dans la résolution d'incidents, la gestion Active Directory, le déploiement de solutions informatiques et la supervision de réseaux mobiles 2G/3G/4G.</p>
+        <p>Mon leadership naturel et mon éthique de travail irréprochable font de moi un atout fiable pour toute équipe IT.</p>
+        <div class="about-infos">
+          <div class="about-info-item"><span class="icon">📍</span><span class="val">Cotonou, Akpaka (Avotrou)</span></div>
+          <div class="about-info-item"><span class="icon">🎓</span><span class="val">Master II – Gestion de Projet</span></div>
+          <div class="about-info-item"><span class="icon">📞</span><span class="val">+229 01 96 60 11 58</span></div>
+          <div class="about-info-item"><span class="icon">✉️</span><span class="val">mouabi6@gmail.com</span></div>
+          <div class="about-info-item"><span class="icon">🚗</span><span class="val">Permis B</span></div>
+          <div class="about-info-item"><span class="icon">💼</span><span class="val">Disponible immédiatement</span></div>
+        </div>
+        <div class="about-langs">
+          <h4>Langues</h4>
+          <div class="lang-items">
+            <div class="lang-item">🇫🇷 Français</div>
+            <div class="lang-item">🇬🇧 Anglais</div>
+            <div class="lang-item">🌍 Yoruba</div>
+          </div>
+        </div>
+        <div class="about-langs" style="margin-top:1rem">
+          <h4>Centres d'intérêt</h4>
+          <div class="interests">
+            <span class="interest-tag">⚽ Football</span>
+            <span class="interest-tag">🤾 Handball</span>
+            <span class="interest-tag">💻 Informatique</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<section id="about">
-  <div class="bar"></div>
-  <div class="stitle">À <span>propos</span></div>
-  <p class="ssub">Qui suis-je ?</p>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>Technicien support informatique et réseaux télécoms passionné, je mets à profit une expérience terrain solide pour offrir un support efficace et réactif aux utilisateurs.</p>
-      <p>Polyvalent et orienté résultats, j'excelle dans la résolution d'incidents, la gestion Active Directory et le déploiement de solutions informatiques.</p>
-      <p>Mon leadership naturel et mon éthique de travail irréprochable font de moi un atout fiable pour toute équipe IT.</p>
+<!-- COMPÉTENCES -->
+<section id="competences">
+  <div class="sec-header">
+    <div class="sec-label">Compétences</div>
+    <div class="sec-title">Mon <span>Arsenal Technique</span></div>
+    <p class="sec-sub">Les outils et technologies que je maîtrise</p>
+  </div>
+  <div class="skills-filter">
+    <button class="filter-btn active" onclick="filterSkills('all',this)">Tout</button>
+    <button class="filter-btn" onclick="filterSkills('support',this)">Support IT</button>
+    <button class="filter-btn" onclick="filterSkills('reseau',this)">Réseaux</button>
+    <button class="filter-btn" onclick="filterSkills('outils',this)">Outils</button>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-item" data-cat="support"><div class="skill-header"><span class="skill-name">🖥️ Support N1 & N2</span><span class="skill-pct">90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
+    <div class="skill-item" data-cat="support"><div class="skill-header"><span class="skill-name">🗂️ Active Directory & GPO</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
+    <div class="skill-item" data-cat="support"><div class="skill-header"><span class="skill-name">💻 Windows 10/11</span><span class="skill-pct">88%</span></div><div class="skill-bar"><div class="skill-fill" data-width="88"></div></div></div>
+    <div class="skill-item" data-cat="support"><div class="skill-header"><span class="skill-name">🖨️ Maintenance Imprimantes</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
+    <div class="skill-item" data-cat="reseau"><div class="skill-header"><span class="skill-name">📡 BTS 2G/3G/4G</span><span class="skill-pct">78%</span></div><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div></div>
+    <div class="skill-item" data-cat="reseau"><div class="skill-header"><span class="skill-name">🔌 Fibre Optique & Câblage</span><span class="skill-pct">82%</span></div><div class="skill-bar"><div class="skill-fill" data-width="82"></div></div></div>
+    <div class="skill-item" data-cat="reseau"><div class="skill-header"><span class="skill-name">💳 TPE / Mobile Money</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
+    <div class="skill-item" data-cat="outils"><div class="skill-header"><span class="skill-name">🔭 SolarWinds / Orion</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
+    <div class="skill-item" data-cat="outils"><div class="skill-header"><span class="skill-name">📊 Kibana / iMaster / ENM</span><span class="skill-pct">72%</span></div><div class="skill-bar"><div class="skill-fill" data-width="72"></div></div></div>
+    <div class="skill-item" data-cat="outils"><div class="skill-header"><span class="skill-name">📁 Pack Office & MS Project</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
+  </div>
+</section>
+
+<!-- EXPÉRIENCE / FORMATION -->
+<div id="experience" class="full-section" style="background:var(--bg2)">
+  <div>
+    <div class="sec-header">
+      <div class="sec-label">Parcours</div>
+      <div class="sec-title">Expérience & <span>Formation</span></div>
+      <p class="sec-sub">Mon chemin professionnel et académique</p>
     </div>
-    <div class="stats">
-      <div class="stat"><div class="n">~3 ans</div><div class="l">Expérience cumulée</div></div>
-      <div class="stat"><div class="n">7</div><div class="l">Postes occupés</div></div>
-      <div class="stat"><div class="n">3</div><div class="l">Certifications</div></div>
-      <div class="stat"><div class="n">3</div><div class="l">Langues maîtrisées</div></div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('exp',this)">💼 Expérience</button>
+      <button class="tab" onclick="switchTab('edu',this)">🎓 Formation</button>
+      <button class="tab" onclick="switchTab('civic',this)">🏛️ Engagement citoyen</button>
+    </div>
+
+    <div class="tab-content active" id="tab-exp">
+      <div class="tl">
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Technicien Maintenance Informatique</div><div class="tlco">Fedpay – Natitingou, Bénin</div></div><span class="tld">Juin – Juil. 2025 · 2 mois</span></div><ul class="tll"><li>Déploiement de terminaux de paiement électronique (TPE)</li><li>Assistance aux marchands et formation de base</li><li>Support et résolution d'incidents Mobile Money</li></ul><div class="tl-tags"><span class="tl-tag">TPE</span><span class="tl-tag">Mobile Money</span><span class="tl-tag">Support</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Technicien Support Informatique</div><div class="tlco">FAI & Fils – Cotonou</div></div><span class="tld">Avr. 2024 – Jan. 2025 · 10 mois</span></div><ul class="tll"><li>Support informatique utilisateurs</li><li>Maintenance des imprimantes et photocopieuses</li><li>Renouvellement du matériel d'impression</li><li>Mise en place du réseau informatique</li></ul><div class="tl-tags"><span class="tl-tag">Helpdesk</span><span class="tl-tag">Réseau</span><span class="tl-tag">Maintenance</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Technicien Front Office</div><div class="tlco">ERICSSON – MTN BENIN</div></div><span class="tld">Nov. 2022 – Juil. 2023 · 9 mois</span></div><ul class="tll"><li>Supervision en temps réel des sites BTS 2G/3G/4G</li><li>Détection et remontée des alertes réseau</li><li>Support au dépannage lors d'incidents réseau</li><li>Tests alarmes sites & reporting horaire du trafic</li></ul><div class="tl-tags"><span class="tl-tag">BTS 4G</span><span class="tl-tag">Monitoring</span><span class="tl-tag">Ericsson</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Stagiaire IT Support Utilisateur</div><div class="tlco">OURANOS LTD – MTN BENIN</div></div><span class="tld">Juil. – Nov. 2022 · 5 mois</span></div><ul class="tll"><li>Helpdesk et assistance technique</li><li>Installation et configuration Windows 10 / PC HP</li><li>Monitoring serveur, fibre optique et liens EBU</li><li>Gestion GPO, Active Directory, câblage réseau</li></ul><div class="tl-tags"><span class="tl-tag">Active Directory</span><span class="tl-tag">GPO</span><span class="tl-tag">Windows</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Stage Technicien Infogérance</div><div class="tlco">COGITHECH – Cotonou</div></div><span class="tld">Mai – Juil. 2022 · 3 mois</span></div><ul class="tll"><li>Maintenance des imprimantes ORABANK</li><li>Déploiement réseau fibre (salle Gouv NSS)</li><li>Installation et configuration de matériels informatiques</li></ul><div class="tl-tags"><span class="tl-tag">Fibre</span><span class="tl-tag">Infogérance</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Stagiaire Technicien Réseau</div><div class="tlco">COMTEL GROUP – Cotonou</div></div><span class="tld">Déc. 2021 – Mai 2022 · 6 mois</span></div><ul class="tll"><li>Participation à des projets pour institutions publiques et privées</li><li>Maintenance des serveurs, caméras et postes informatiques</li><li>Déploiement fibre optique</li></ul><div class="tl-tags"><span class="tl-tag">Réseau</span><span class="tl-tag">Fibre</span><span class="tl-tag">Serveurs</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Caissier Mobile Money</div><div class="tlco">BELMO SERVICES – Cotonou</div></div><span class="tld">Mai – Août 2021 · 4 mois</span></div><ul class="tll"><li>Opérations d'activations de services Mobile Money pour les réseaux mobiles</li></ul><div class="tl-tags"><span class="tl-tag">Mobile Money</span><span class="tl-tag">Service client</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Stagiaire Assistant Administrateur Réseaux</div><div class="tlco">OCTOGONE Trading Oil S.A.</div></div><span class="tld">Déc. 2020 – Mar. 2021 · 4 mois</span></div><ul class="tll"><li>Maintenance préventive et curative des postes utilisateurs</li><li>Formation du personnel et modernisation Internet</li><li>Gestion GPO, Active Directory, Exchange</li><li>Appui à l'interconnexion entre sites</li></ul><div class="tl-tags"><span class="tl-tag">Exchange</span><span class="tl-tag">Active Directory</span><span class="tl-tag">Formation</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-edu">
+      <div class="tl">
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Master II – Gestion de Projet</div><div class="tlco">Institut Universitaire Les Cours SONOU, Cotonou</div></div><span class="tld">Depuis nov. 2025</span></div><ul class="tll"><li>Gestion de projets informatiques et organisationnels</li><li>Management d'équipes et leadership</li></ul><div class="tl-tags"><span class="tl-tag">Gestion de projet</span><span class="tl-tag">Management</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Master I – Gestion de Projet</div><div class="tlco">Institut Universitaire Les Cours SONOU, Cotonou</div></div><span class="tld">Fév. – Oct. 2025</span></div><ul class="tll"><li>Planification et pilotage de projets</li><li>Analyse des risques et gestion des parties prenantes</li></ul><div class="tl-tags"><span class="tl-tag">Planification</span><span class="tl-tag">Pilotage</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Licence Pro – Génie Télécoms & TIC</div><div class="tlco">Université Catholique de l'Afrique de l'Ouest</div></div><span class="tld">Oct. 2017 – Août 2020</span></div><ul class="tll"><li>Réseaux informatiques et télécommunications</li><li>Infrastructure IT et systèmes embarqués</li></ul><div class="tl-tags"><span class="tl-tag">Télécoms</span><span class="tl-tag">TIC</span><span class="tl-tag">Réseaux</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Baccalauréat série C</div><div class="tlco">Collège Catholique Père Aupiais, Cotonou</div></div><span class="tld">Oct. 2016 – Juil. 2017</span></div><ul class="tll"><li>Sciences exactes — Mathématiques, Physique</li></ul><div class="tl-tags"><span class="tl-tag">Sciences</span><span class="tl-tag">Mathématiques</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-civic">
+      <div class="tl">
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Président au poste de vote</div><div class="tlco">CENA – Élections Présidentielles</div></div><span class="tld">Avril 2026</span></div><ul class="tll"><li>Direction de l'équipe du bureau de vote</li><li>Garantie de la régularité du scrutin</li><li>Gestion des procès-verbaux</li></ul><div class="tl-tags"><span class="tl-tag">Leadership</span><span class="tl-tag">Gestion d'équipe</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">1er Assesseur au poste de vote</div><div class="tlco">CENA – Élections Législatives & Communales</div></div><span class="tld">Janvier 2026</span></div><ul class="tll"><li>Accueil des électeurs</li><li>Contrôle de conformité des électeurs</li><li>Assistance directe à la présidence du poste</li></ul><div class="tl-tags"><span class="tl-tag">Organisation</span><span class="tl-tag">Rigueur</span></div></div></div>
+        <div class="tli"><div class="tl-dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Assesseur au poste de vote</div><div class="tlco">CENA – Élections Municipales & Communales</div></div><span class="tld">Mai 2020</span></div><ul class="tll"><li>Accueil des électeurs et gestion de l'émargement</li><li>Participation aux opérations de dépouillement</li></ul><div class="tl-tags"><span class="tl-tag">Citoyenneté</span><span class="tl-tag">Responsabilité</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RÉFÉRENCES -->
+<section id="references">
+  <div class="sec-header">
+    <div class="sec-label">Références</div>
+    <div class="sec-title">Ce que disent mes <span>collaborateurs</span></div>
+    <p class="sec-sub">Témoignages de professionnels ayant travaillé avec moi</p>
+  </div>
+  <div class="refs-grid">
+    <div class="ref-card">
+      <div class="ref-quote">"</div>
+      <p class="ref-text">Mohamed Saïd est un technicien sérieux et très compétent. Sa maîtrise des réseaux informatiques et son sens des responsabilités en font un professionnel de confiance. Il sait gérer des situations complexes avec calme et efficacité. Je le recommande sans hésitation pour tout poste en administration réseau ou support IT.</p>
+      <div class="ref-person">
+        <div class="ref-avatar">JD</div>
+        <div>
+          <div class="ref-name">Mr Junior DONOUMASSOU</div>
+          <div class="ref-role">Administrateur Réseau – CMACGM</div>
+          <div class="ref-tel">📞 +229 01 66 99 32 36</div>
+        </div>
+      </div>
+    </div>
+    <div class="ref-card">
+      <div class="ref-quote">"</div>
+      <p class="ref-text">Durant son stage au sein de notre équipe IT chez OURANOS LTD, Mohamed Saïd a fait preuve d'un professionnalisme remarquable. Réactif, rigoureux et toujours disponible pour les utilisateurs, il a su s'intégrer rapidement et apporter une vraie valeur ajoutée à notre helpdesk. Un élément fiable sur qui on peut compter.</p>
+      <div class="ref-person">
+        <div class="ref-avatar">AA</div>
+        <div>
+          <div class="ref-name">Mr Aurel AKUESON</div>
+          <div class="ref-role">Superviseur IT Helpdesk – OURANOS LTD / MTN BENIN</div>
+          <div class="ref-tel">📞 +229 01 61 11 03 35</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="skills">
-  <div class="bar"></div>
-  <div class="stitle">Mes <span>Compétences</span></div>
-  <p class="ssub">Expertise technique et outils maîtrisés</p>
-  <div class="sk-grid">
-    <div class="sk"><div class="ico">🖥️</div><h3>Support & Helpdesk</h3><div class="tags"><span class="tag">Support N1 & N2</span><span class="tag">Gestion de tickets</span><span class="tag">Active Directory</span><span class="tag">GPO</span><span class="tag">Windows 10/11</span><span class="tag">Pack Office</span><span class="tag">MS Project</span></div></div>
-    <div class="sk"><div class="ico">📡</div><h3>Réseaux & Télécoms</h3><div class="tags"><span class="tag">BTS 2G/3G/4G</span><span class="tag">Fibre optique</span><span class="tag">Câblage réseau</span><span class="tag">Déploiement</span><span class="tag">Monitoring</span></div></div>
-    <div class="sk"><div class="ico">🔭</div><h3>Outils de Monitoring</h3><div class="tags"><span class="tag">Winfiol</span><span class="tag">Orion</span><span class="tag">SolarWinds</span><span class="tag">Kibana</span><span class="tag">iMaster</span><span class="tag">ENM</span></div></div>
-    <div class="sk"><div class="ico">⚙️</div><h3>Infrastructure & Terrain</h3><div class="tags"><span class="tag">TPE / Mobile Money</span><span class="tag">Imprimantes</span><span class="tag">Routeurs</span><span class="tag">Installation PC</span><span class="tag">Maintenance préventive</span></div></div>
-    <div class="sk"><div class="ico">🌐</div><h3>Langues</h3><div class="tags"><span class="tag">Français</span><span class="tag">Anglais</span><span class="tag">Yoruba</span></div></div>
-    <div class="sk"><div class="ico">🤝</div><h3>Soft Skills</h3><div class="tags"><span class="tag">Leadership</span><span class="tag">Esprit d'équipe</span><span class="tag">Communication</span><span class="tag">Adaptabilité</span></div></div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="bar"></div>
-  <div class="stitle">Mes <span>Expériences</span></div>
-  <p class="ssub">Parcours professionnel · ~3 ans cumulés</p>
-  <div class="tl">
-    <div class="tli"><div class="dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Technicien Maintenance Informatique</div><div class="tlco">Fedpay – Natitingou, Bénin</div></div><span class="tld">Juin – Juil. 2025 · 2 mois</span></div><ul class="tll"><li>Déploiement de terminaux de paiement électronique (TPE)</li><li>Assistance aux marchands et formation de base</li><li>Support et résolution d'incidents Mobile Money</li></ul></div></div>
-    <div class="tli"><div class="dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Technicien Support Informatique</div><div class="tlco">FAI & Fils – Cotonou</div></div><span class="tld">Avr. 2024 – Jan. 2025 · 10 mois</span></div><ul class="tll"><li>Support informatique utilisateurs</li><li>Maintenance des imprimantes et photocopieuses</li><li>Mise en place du réseau informatique</li></ul></div></div>
-    <div class="tli"><div class="dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Technicien Front Office</div><div class="tlco">ERICSSON – MTN BENIN</div></div><span class="tld">Nov. 2022 – Juil. 2023 · 9 mois</span></div><ul class="tll"><li>Supervision en temps réel des sites BTS 2G/3G/4G</li><li>Détection et remontée des alertes réseau</li><li>Support au dépannage lors d'incidents réseau</li><li>Reporting horaire du trafic Internet & Mobile Money</li></ul></div></div>
-    <div class="tli"><div class="dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Stagiaire IT Support Utilisateur</div><div class="tlco">OURANOS LTD – MTN BENIN</div></div><span class="tld">Juil. – Nov. 2022 · 5 mois</span></div><ul class="tll"><li>Helpdesk et assistance technique</li><li>Installation et configuration Windows 10 / PC HP</li><li>Monitoring serveur, fibre optique et liens EBU</li><li>Gestion GPO, Active Directory, câblage réseau</li></ul></div></div>
-    <div class="tli"><div class="dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Stage Technicien Infogérance</div><div class="tlco">COGITHECH – Cotonou</div></div><span class="tld">Mai – Juil. 2022 · 3 mois</span></div><ul class="tll"><li>Maintenance des imprimantes ORABANK</li><li>Déploiement réseau fibre (salle Gouv NSS)</li><li>Installation et configuration de matériels informatiques</li></ul></div></div>
-    <div class="tli"><div class="dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Stagiaire Technicien Réseau</div><div class="tlco">COMTEL GROUP – Cotonou</div></div><span class="tld">Déc. 2021 – Mai 2022 · 6 mois</span></div><ul class="tll"><li>Projets pour institutions publiques et privées</li><li>Maintenance des serveurs, caméras et postes</li><li>Déploiement fibre optique</li></ul></div></div>
-    <div class="tli"><div class="dot"></div><div class="tlc"><div class="tlh"><div><div class="tlt">Stagiaire Assistant Administrateur Réseaux</div><div class="tlco">OCTOGONE Trading Oil S.A.</div></div><span class="tld">Déc. 2020 – Mar. 2021 · 4 mois</span></div><ul class="tll"><li>Maintenance préventive et curative des postes utilisateurs</li><li>Formation du personnel et modernisation Internet</li><li>Gestion GPO, Active Directory, Exchange</li><li>Appui à l'interconnexion entre sites</li></ul></div></div>
-  </div>
-</section>
-
-<section id="education">
-  <div class="bar"></div>
-  <div class="stitle">Ma <span>Formation</span></div>
-  <p class="ssub">Parcours académique</p>
-  <div class="edu-grid">
-    <div class="edu"><div class="deg">Master II – Gestion de Projet</div><div class="sch">Institut Universitaire Les Cours SONOU, Cotonou</div><div class="per">📅 Depuis nov. 2025</div></div>
-    <div class="edu"><div class="deg">Master I – Gestion de Projet</div><div class="sch">Institut Universitaire Les Cours SONOU, Cotonou</div><div class="per">📅 Fév. – Oct. 2025</div></div>
-    <div class="edu"><div class="deg">Licence Pro – Génie Télécoms & TIC</div><div class="sch">Université Catholique de l'Afrique de l'Ouest</div><div class="per">📅 Oct. 2017 – Août 2020</div></div>
-    <div class="edu"><div class="deg">Baccalauréat série C</div><div class="sch">Collège Catholique Père Aupiais, Cotonou</div><div class="per">📅 Oct. 2016 – Juil. 2017</div></div>
-  </div>
-  <div style="margin-top:3.5rem">
-    <div class="bar"></div>
-    <div class="stitle" style="font-size:1.4rem;margin-bottom:.4rem">Certifications <span>officielles</span></div>
-    <p class="ssub" style="margin-bottom:1rem">Reconnaissances et diplômes professionnels</p>
-    <div class="cert-grid">
-      <div class="cert"><div class="ci">🎓</div><div><h4>Fondamentaux du Support Technique</h4><p>Google IT – Coursera<br><small style="color:#94a3b8">ID : PW16VQUDG5VB</small></p></div></div>
-      <div class="cert"><div class="ci">📄</div><div><h4>Google Docs</h4><p>Google – Coursera<br><small style="color:#94a3b8">ID : NJWYXAJ8LMJS</small></p></div></div>
-      <div class="cert"><div class="ci">📱</div><div><h4>Marketing Numérique</h4><p>OIF – Formation en ligne<br><small style="color:#94a3b8">ID : x9no3c0Csz</small></p></div></div>
+<!-- CONTACT -->
+<div id="contact" class="full-section" style="background:var(--bg2)">
+  <div>
+    <div class="sec-header">
+      <div class="sec-label">Contact</div>
+      <div class="sec-title">Travaillons <span>Ensemble</span></div>
+      <p class="sec-sub">Un projet ou une opportunité ? Contactez-moi !</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Discutons de votre projet</h3>
+        <p>Je suis disponible pour des missions freelance, des collaborations ou des opportunités d'emploi. Contactez-moi et construisons quelque chose ensemble !</p>
+        <div class="contact-items">
+          <a href="tel:+22901966011 58" class="contact-item"><div class="ico">📞</div><div class="info"><div class="label">Téléphone</div><div class="val">+229 01 96 60 11 58</div></div></a>
+          <a href="tel:+22901604063 65" class="contact-item"><div class="ico">📞</div><div class="info"><div class="label">Téléphone 2</div><div class="val">+229 01 60 40 63 65</div></div></a>
+          <a href="mailto:mouabi6@gmail.com" class="contact-item"><div class="ico">✉️</div><div class="info"><div class="label">Email</div><div class="val">mouabi6@gmail.com</div></div></a>
+          <div class="contact-item"><div class="ico">📍</div><div class="info"><div class="label">Localisation</div><div class="val">Cotonou, Akpaka (Avotrou), Bénin 🇧🇯</div></div></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>Envoyer un message</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Nom complet</label><input type="text" placeholder="Votre nom"/></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="votre@email.com"/></div>
+        </div>
+        <div class="form-group"><label>Sujet</label><input type="text" placeholder="Objet de votre message"/></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Votre message..."></textarea></div>
+        <button class="form-submit">Envoyer le message ✉️</button>
+      </div>
     </div>
   </div>
-</section>
-
-<section id="contact">
-  <div class="bar"></div>
-  <div class="stitle">Me <span>Contacter</span></div>
-  <p class="ssub">Disponible pour toute opportunité professionnelle</p>
-  <div class="cbox">
-    <p>N'hésitez pas à me contacter pour toute collaboration, mission ou opportunité dans le domaine de l'informatique et des réseaux télécoms.</p>
-    <div class="clinks">
-      <a href="mailto:mouabi6@gmail.com" class="cl">✉️ mouabi6@gmail.com</a>
-      <a href="tel:+22901966011 58" class="cl">📞 +229 01 96 60 11 58</a>
-      <a href="tel:+22901604063 65" class="cl">📞 +229 01 60 40 63 65</a>
-      <a href="#" class="cl">📍 Cotonou, Akpaka (Avotrou)</a>
-    </div>
-  </div>
-</section>
+</div>
 
 <footer>
-  <p>© 2026 Mohamed Saïd Fumilayo OUABI · Technicien Support Informatique & Réseaux Télécoms · Cotonou, Bénin</p>
+  <div class="footer-inner">
+    <div class="footer-logo">OMSF</div>
+    <div class="footer-copy">© 2026 Mohamed Saïd Fumilayo OUABI · Technicien IT & Réseaux Télécoms · Cotonou, Bénin 🇧🇯</div>
+  </div>
 </footer>
 
+<script>
+  const words=['Technicien Support IT','Technicien Réseaux Télécoms','Spécialiste Helpdesk','Expert BTS 2G/3G/4G'];
+  let wi=0,ci=0,del=false;
+  const el=document.getElementById('typed');
+  function type(){
+    const word=words[wi];
+    if(!del){el.textContent=word.slice(0,++ci);if(ci===word.length){del=true;setTimeout(type,1800);return;}}
+    else{el.textContent=word.slice(0,--ci);if(ci===0){del=false;wi=(wi+1)%words.length;}}
+    setTimeout(type,del?60:100);
+  }
+  type();
+
+  function animateCounters(){
+    document.querySelectorAll('.num[data-target]').forEach(el=>{
+      const target=+el.dataset.target,duration=1500;
+      let start=null;
+      function step(ts){if(!start)start=ts;const p=Math.min((ts-start)/duration,1);el.textContent=Math.floor(p*target);if(p<1)requestAnimationFrame(step);else el.textContent=target;}
+      requestAnimationFrame(step);
+    });
+  }
+
+  function animateBars(){
+    document.querySelectorAll('.skill-fill').forEach(el=>{el.style.width=el.dataset.width+'%';});
+  }
+
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        if(e.target.id==='accueil')animateCounters();
+        if(e.target.id==='competences')animateBars();
+      }
+    });
+  },{threshold:0.2});
+  document.querySelectorAll('section,[id]').forEach(s=>obs.observe(s));
+
+  function switchTab(tab,btn){
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+tab).classList.add('active');
+  }
+
+  function filterSkills(cat,btn){
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.skill-item').forEach(item=>{
+      item.style.display=(cat==='all'||item.dataset.cat===cat)?'block':'none';
+    });
+  }
+</script>
 </body>
 </html>
