@@ -14,11 +14,21 @@
     ::-webkit-scrollbar-track{background:var(--bg)}
     ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
 
+    /* LOADING SCREEN */
+    #loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;transition:opacity .5s ease}
+    #loader.hide{opacity:0;pointer-events:none}
+    .loader-logo{width:80px;height:80px;border-radius:50%;background:#0891b2;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;color:#fff;animation:loaderPulse 1s ease-in-out infinite}
+    @keyframes loaderPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(8,145,178,.4)}50%{transform:scale(1.08);box-shadow:0 0 0 15px rgba(8,145,178,0)}}
+    .loader-bar{width:200px;height:3px;background:var(--border);border-radius:3px;overflow:hidden}
+    .loader-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;width:0;animation:loadFill 2s ease forwards}
+    @keyframes loadFill{0%{width:0}60%{width:70%}100%{width:100%}}
+    .loader-text{color:var(--muted);font-size:.85rem}
+
     /* NAV */
     nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(240,246,255,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;transition:background .3s}
     [data-theme="dark"] nav{background:rgba(10,15,30,0.96)}
-    .nav-logo{display:flex;align-items:center;gap:.6rem}
-    .nav-logo-circle{width:38px;height:38px;border-radius:50%;background:#0891b2;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:900;color:#fff;box-shadow:0 0 0 3px rgba(8,145,178,.15),0 0 0 6px rgba(8,145,178,.08);animation:logoPulse 3s ease-in-out infinite;flex-shrink:0}
+    .nav-logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+    .nav-logo-circle{width:38px;height:38px;border-radius:50%;background:#0891b2;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;color:#fff;animation:logoPulse 3s ease-in-out infinite;flex-shrink:0}
     @keyframes logoPulse{0%,100%{box-shadow:0 0 0 3px rgba(8,145,178,.2),0 0 0 6px rgba(8,145,178,.08)}50%{box-shadow:0 0 0 5px rgba(8,145,178,.3),0 0 0 10px rgba(8,145,178,.1)}}
     .nav-right{display:flex;align-items:center;gap:1rem}
     .nav-links{display:flex;gap:1.4rem;list-style:none;align-items:center}
@@ -26,12 +36,12 @@
     .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s;border-radius:2px}
     .nav-links a:hover{color:var(--accent)}
     .nav-links a:hover::after{width:100%}
-    .nav-contact{background:var(--accent) !important;color:#fff !important;padding:.4rem 1rem;border-radius:6px;font-size:.83rem;font-weight:600;text-decoration:none !important}
+    .nav-contact{background:var(--accent) !important;color:#fff !important;padding:.4rem 1rem;border-radius:6px;font-size:.83rem;font-weight:600 !important}
     .nav-contact::after{display:none !important}
     .theme-toggle{background:var(--card);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
     .theme-toggle:hover{border-color:var(--accent)}
     .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
-    .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;display:block;transition:all .3s}
+    .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;display:block}
 
     #bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.4}
 
@@ -55,21 +65,55 @@
     .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
     .btn{padding:.7rem 1.6rem;border-radius:8px;font-size:.88rem;font-weight:600;text-decoration:none;transition:all .3s;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:.4rem}
     .btn-primary{background:var(--accent);color:#fff;box-shadow:0 4px 20px rgba(8,145,178,.25)}
-    .btn-primary:hover{background:var(--accent2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(8,145,178,.4)}
+    .btn-primary:hover{background:var(--accent2);transform:translateY(-3px)}
     .btn-outline{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
     .btn-outline:hover{background:rgba(8,145,178,.08);transform:translateY(-3px)}
     .hero-counters{display:flex;gap:2rem;margin-top:2.5rem;flex-wrap:wrap}
     .counter .num{font-size:1.9rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
     .counter .lbl{font-size:.72rem;color:var(--muted)}
-    .hero-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.8rem;width:290px;box-shadow:0 20px 60px var(--shadow);position:relative}
+
+    /* HERO CARD WITH ORBITING LOGOS */
+    .hero-card-wrap{position:relative;width:300px;height:300px;display:flex;align-items:center;justify-content:center}
+    .hero-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.6rem;width:260px;box-shadow:0 20px 60px var(--shadow);position:relative;z-index:2}
     .hero-card::before{content:'';position:absolute;inset:-1px;border-radius:20px;background:linear-gradient(135deg,rgba(8,145,178,.2),rgba(14,116,144,.2));z-index:-1}
-    .hc-avatar{width:72px;height:72px;background:#0891b2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:900;color:#fff;margin:0 auto 1rem;box-shadow:0 0 0 4px rgba(8,145,178,.2),0 0 0 8px rgba(8,145,178,.08);animation:logoPulse 3s ease-in-out infinite}
-    .hc-name{text-align:center;font-weight:700;margin-bottom:.3rem;font-size:.93rem}
-    .hc-role{text-align:center;color:var(--accent);font-size:.78rem;margin-bottom:1rem}
-    .hc-tags{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:1rem}
-    .hc-tag{background:rgba(8,145,178,.08);border:1px solid rgba(8,145,178,.2);color:var(--accent);padding:.18rem .55rem;border-radius:999px;font-size:.69rem}
-    .hc-info{display:flex;flex-direction:column;gap:.4rem}
-    .hc-info-item{display:flex;align-items:center;gap:.5rem;font-size:.79rem;color:var(--muted)}
+    .hc-avatar{width:70px;height:70px;background:#0891b2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:900;color:#fff;margin:0 auto .8rem;animation:logoPulse 3s ease-in-out infinite}
+    .hc-name{text-align:center;font-weight:700;margin-bottom:.2rem;font-size:.9rem}
+    .hc-role{text-align:center;color:var(--accent);font-size:.75rem;margin-bottom:.8rem}
+    .hc-tags{display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center;margin-bottom:.8rem}
+    .hc-tag{background:rgba(8,145,178,.08);border:1px solid rgba(8,145,178,.2);color:var(--accent);padding:.15rem .5rem;border-radius:999px;font-size:.67rem}
+    .hc-info{display:flex;flex-direction:column;gap:.35rem}
+    .hc-info-item{display:flex;align-items:center;gap:.5rem;font-size:.76rem;color:var(--muted)}
+
+    /* ORBITING LOGOS */
+    .orbit-ring{position:absolute;border-radius:50%;border:1px dashed rgba(8,145,178,.2);animation:spin linear infinite}
+    .orbit-ring-1{width:260px;height:260px;animation-duration:12s}
+    .orbit-ring-2{width:300px;height:300px;animation-duration:18s;animation-direction:reverse}
+    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .orbit-logo{position:absolute;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:900;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);animation:counterSpin linear infinite}
+    .orbit-logo-1{animation-duration:12s}
+    .orbit-logo-2{animation-duration:12s}
+    .orbit-logo-3{animation-duration:18s;animation-direction:reverse}
+    .orbit-logo-4{animation-duration:18s;animation-direction:reverse}
+    @keyframes counterSpin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+    .ol-google{background:linear-gradient(135deg,#4285F4,#34A853)}
+    .ol-mtn{background:linear-gradient(135deg,#FFC61E,#FF8C00);color:#1a1a1a !important}
+    .ol-ericsson{background:linear-gradient(135deg,#0082CB,#005a8e)}
+    .ol-oif{background:linear-gradient(135deg,#003087,#0057b8)}
+
+    /* ORBIT POSITIONING - ring 1 (260px) */
+    .ring1-pos1{top:50%;left:50%;margin-top:-130px;margin-left:-18px} /* top */
+    .ring1-pos2{top:50%;left:50%;margin-top:94px;margin-left:-18px}  /* bottom */
+
+    /* ORBIT POSITIONING - ring 2 (300px) */
+    .ring2-pos1{top:50%;left:50%;margin-top:-168px;margin-left:-18px} /* top */
+    .ring2-pos2{top:50%;left:50%;margin-top:132px;margin-left:-18px}  /* bottom */
+
+    /* LINKEDIN */
+    .hero-social{display:flex;gap:.8rem;margin-top:1.5rem;align-items:center}
+    .linkedin-btn{display:inline-flex;align-items:center;gap:.5rem;background:#0077B5;color:#fff;padding:.5rem 1rem;border-radius:8px;text-decoration:none;font-size:.82rem;font-weight:600;transition:all .2s}
+    .linkedin-btn:hover{background:#005885;transform:translateY(-2px)}
+    .linkedin-icon{width:18px;height:18px;background:#fff;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .linkedin-icon span{color:#0077B5;font-size:.65rem;font-weight:900;line-height:1}
 
     /* SECTIONS */
     .sec-wrap{padding:5rem 2rem;position:relative;z-index:1}
@@ -83,7 +127,7 @@
 
     /* ABOUT */
     .about-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:4rem;align-items:start}
-    .about-avatar{width:90px;height:90px;background:#0891b2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:1.5rem;box-shadow:0 0 0 5px rgba(8,145,178,.2),0 0 0 10px rgba(8,145,178,.08);animation:logoPulse 3s ease-in-out infinite}
+    .about-avatar{width:90px;height:90px;background:#0891b2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:1.5rem;animation:logoPulse 3s ease-in-out infinite}
     .about-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
     .chip{background:rgba(8,145,178,.08);border:1px solid rgba(8,145,178,.2);color:var(--accent);padding:.28rem .75rem;border-radius:999px;font-size:.74rem}
     .exp-badge{background:linear-gradient(135deg,rgba(8,145,178,.1),rgba(14,116,144,.1));border:1px solid rgba(8,145,178,.25);border-radius:12px;padding:1.2rem;text-align:center}
@@ -118,7 +162,7 @@
     .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
     .cert-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.3rem;display:flex;gap:1rem;align-items:flex-start;transition:transform .2s,border-color .2s,box-shadow .2s}
     .cert-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 8px 25px var(--shadow)}
-    .cert-logo{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+    .cert-logo{width:46px;height:46px;border-radius:10px;flex-shrink:0;overflow:hidden}
     .cert-info h4{font-size:.87rem;font-weight:700;margin-bottom:.2rem}
     .cert-info .org{color:var(--accent);font-size:.77rem;margin-bottom:.2rem}
     .cert-info .date{color:var(--muted);font-size:.73rem}
@@ -182,27 +226,36 @@
     .fsub:hover{background:var(--accent2);transform:translateY(-2px)}
     .fsuccess{display:none;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#16a34a;padding:.9rem;border-radius:8px;text-align:center;margin-top:.8rem;font-size:.87rem}
 
+    /* FOOTER */
     footer{background:var(--bg);border-top:1px solid var(--border);padding:1.5rem 2rem;position:relative;z-index:1}
     .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
     .footer-logo{display:flex;align-items:center;gap:.5rem}
-    .footer-logo-circle{width:30px;height:30px;border-radius:50%;background:#0891b2;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:900;color:#fff;box-shadow:0 0 0 2px rgba(8,145,178,.2)}
+    .footer-logo-circle{width:30px;height:30px;border-radius:50%;background:#0891b2;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:900;color:#fff}
     .footer-copy{color:var(--muted);font-size:.78rem}
 
     .reveal{opacity:0;transform:translateY(25px);transition:opacity .7s ease,transform .7s ease}
     .reveal.visible{opacity:1;transform:translateY(0)}
 
     @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-right-wrap{display:none}.about-grid{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}}
-    @media(max-width:768px){nav{padding:.8rem 1rem}.nav-links{display:none;position:fixed;top:60px;left:0;width:100%;background:var(--bg);flex-direction:column;padding:1rem;border-bottom:1px solid var(--border);gap:.5rem;z-index:999}.nav-links.open{display:flex}.hamburger{display:flex}.about-infos{grid-template-columns:1fr}.frow{grid-template-columns:1fr}.hero-counters{gap:1rem}}
-    @media(max-width:480px){.cert-grid{grid-template-columns:1fr}.skills-grid{grid-template-columns:1fr}.refs-grid{grid-template-columns:1fr}.tabs{gap:.4rem}.tab{padding:.4rem .9rem;font-size:.78rem}}
+    @media(max-width:768px){nav{padding:.8rem 1rem}.nav-links{display:none;position:fixed;top:60px;left:0;width:100%;background:var(--bg);flex-direction:column;padding:1rem;border-bottom:1px solid var(--border);gap:.5rem;z-index:999}.nav-links.open{display:flex}.hamburger{display:flex}.about-infos{grid-template-columns:1fr}.frow{grid-template-columns:1fr}}
+    @media(max-width:480px){.cert-grid{grid-template-columns:1fr}.skills-grid{grid-template-columns:1fr}.refs-grid{grid-template-columns:1fr}.tab{padding:.4rem .9rem;font-size:.78rem}}
   </style>
 </head>
 <body>
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <div class="loader-logo">OMSF</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-text">Chargement du portfolio...</div>
+</div>
+
 <canvas id="bgCanvas"></canvas>
 
 <nav>
-  <div class="nav-logo">
+  <a href="#accueil" class="nav-logo">
     <div class="nav-logo-circle">OMSF</div>
-  </div>
+  </a>
   <div class="nav-right">
     <ul class="nav-links" id="navLinks">
       <li><a href="#accueil">Accueil</a></li>
@@ -231,6 +284,12 @@
         <a href="#experience" class="btn btn-primary">Voir mes expériences</a>
         <a href="#contact" class="btn btn-outline">Travailler ensemble</a>
       </div>
+      <div class="hero-social">
+        <a href="https://www.linkedin.com/in/mohamed-sa%C3%AFd-fumilayo-ouabi-2a7329189/" target="_blank" class="linkedin-btn">
+          <div class="linkedin-icon"><span>in</span></div>
+          LinkedIn
+        </a>
+      </div>
       <div class="hero-counters">
         <div class="counter"><div class="num" data-target="3">0</div><div class="lbl">Ans d'expérience</div></div>
         <div class="counter"><div class="num" data-target="8">0</div><div class="lbl">Postes occupés</div></div>
@@ -239,21 +298,44 @@
       </div>
     </div>
     <div class="hero-right-wrap">
-      <div class="hero-card">
-        <div class="hc-avatar">OMSF</div>
-        <div class="hc-name">Mohamed Saïd F. OUABI</div>
-        <div class="hc-role">Technicien IT & Gestionnaire de Projet</div>
-        <div class="hc-tags">
-          <span class="hc-tag">Support N1/N2</span>
-          <span class="hc-tag">Réseaux</span>
-          <span class="hc-tag">Gestion de Projet</span>
-          <span class="hc-tag">Active Directory</span>
+      <div class="hero-card-wrap">
+        <!-- Orbit rings -->
+        <div class="orbit-ring orbit-ring-1">
+          <!-- Google -->
+          <div class="orbit-logo orbit-logo-1 ol-google ring1-pos1">
+            <svg width="20" height="20" viewBox="0 0 20 20"><text x="10" y="14" text-anchor="middle" font-size="12" font-weight="900" fill="#fff" font-family="sans-serif">G</text></svg>
+          </div>
+          <!-- MTN -->
+          <div class="orbit-logo orbit-logo-2 ol-mtn ring1-pos2">
+            <svg width="20" height="20" viewBox="0 0 20 20"><text x="10" y="14" text-anchor="middle" font-size="7" font-weight="900" fill="#1a1a1a" font-family="sans-serif">MTN</text></svg>
+          </div>
         </div>
-        <div class="hc-info">
-          <div class="hc-info-item"><span>📍</span><span>Akpakpa, Cotonou 🇧🇯</span></div>
-          <div class="hc-info-item"><span>🎓</span><span>Master II – Gestion de Projet</span></div>
-          <div class="hc-info-item"><span>✉️</span><span>mouabi16@gmail.com</span></div>
-          <div class="hc-info-item"><span>🚗</span><span>Permis B</span></div>
+        <div class="orbit-ring orbit-ring-2">
+          <!-- Ericsson -->
+          <div class="orbit-logo orbit-logo-3 ol-ericsson ring2-pos1">
+            <svg width="20" height="20" viewBox="0 0 20 20"><text x="10" y="14" text-anchor="middle" font-size="7" font-weight="900" fill="#fff" font-family="sans-serif">ERI</text></svg>
+          </div>
+          <!-- OIF -->
+          <div class="orbit-logo orbit-logo-4 ol-oif ring2-pos2">
+            <svg width="20" height="20" viewBox="0 0 20 20"><text x="10" y="14" text-anchor="middle" font-size="7" font-weight="900" fill="#fff" font-family="sans-serif">OIF</text></svg>
+          </div>
+        </div>
+        <!-- Hero Card -->
+        <div class="hero-card">
+          <div class="hc-avatar">OMSF</div>
+          <div class="hc-name">Mohamed Saïd F. OUABI</div>
+          <div class="hc-role">Technicien IT & Gestionnaire de Projet</div>
+          <div class="hc-tags">
+            <span class="hc-tag">Support N1/N2</span>
+            <span class="hc-tag">Réseaux</span>
+            <span class="hc-tag">Gestion Projet</span>
+          </div>
+          <div class="hc-info">
+            <div class="hc-info-item"><span>📍</span><span>Akpakpa, Cotonou 🇧🇯</span></div>
+            <div class="hc-info-item"><span>🎓</span><span>Master II – Gestion de Projet</span></div>
+            <div class="hc-info-item"><span>✉️</span><span>mouabi16@gmail.com</span></div>
+            <div class="hc-info-item"><span>🚗</span><span>Permis B</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -272,10 +354,8 @@
       <div class="reveal">
         <div class="about-avatar">OMSF</div>
         <div class="about-chips">
-          <span class="chip">IT Support</span>
-          <span class="chip">Réseaux Télécoms</span>
-          <span class="chip">Gestion de Projet</span>
-          <span class="chip">Bénin 🇧🇯</span>
+          <span class="chip">IT Support</span><span class="chip">Réseaux Télécoms</span>
+          <span class="chip">Gestion de Projet</span><span class="chip">Bénin 🇧🇯</span>
         </div>
         <div class="exp-badge">
           <div class="big">~3 ans</div>
@@ -396,77 +476,29 @@
       <p class="sec-sub">Certifications reconnues internationalement</p>
     </div>
     <div class="cert-grid">
-      <!-- Google -->
       <div class="cert-card reveal">
-        <div class="cert-logo">
-          <svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#fff" stroke="#e5e7eb" stroke-width="1"/><text x="23" y="28" text-anchor="middle" font-size="18" font-family="sans-serif" font-weight="900"><tspan fill="#4285F4">G</tspan></text><circle cx="33" cy="13" r="5" fill="#EA4335"/><circle cx="33" cy="13" r="2.5" fill="#fff"/></svg>
-        </div>
-        <div class="cert-info">
-          <h4>Technical Support Fundamentals</h4>
-          <div class="org">Google</div>
-          <div class="date">📅 Mai 2026</div>
-          <div class="cid">ID: PW16VQUDG5VB</div>
-        </div>
+        <div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#fff" stroke="#e5e7eb" stroke-width="1"/><text x="10" y="28" font-size="20" font-weight="900" font-family="sans-serif"><tspan fill="#4285F4">G</tspan></text><circle cx="34" cy="12" r="6" fill="#EA4335"/><circle cx="34" cy="12" r="3" fill="#fff"/></svg></div>
+        <div class="cert-info"><h4>Technical Support Fundamentals</h4><div class="org">Google</div><div class="date">📅 Mai 2026</div><div class="cid">ID: PW16VQUDG5VB</div></div>
       </div>
-      <!-- Google Sheets -->
       <div class="cert-card reveal">
-        <div class="cert-logo">
-          <svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#0F9D58"/><rect x="13" y="10" width="20" height="26" rx="2" fill="#fff" opacity="0.2"/><rect x="13" y="10" width="20" height="26" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="13" y1="18" x2="33" y2="18" stroke="#fff" stroke-width="1"/><line x1="13" y1="24" x2="33" y2="24" stroke="#fff" stroke-width="1"/><line x1="13" y1="30" x2="33" y2="30" stroke="#fff" stroke-width="1"/><line x1="21" y1="10" x2="21" y2="36" stroke="#fff" stroke-width="1"/></svg>
-        </div>
-        <div class="cert-info">
-          <h4>Google Sheets</h4>
-          <div class="org">Google Cloud Security</div>
-          <div class="date">📅 Avril 2026</div>
-          <div class="cid">ID: L18VL3G1XM1X</div>
-        </div>
+        <div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#0F9D58"/><rect x="13" y="10" width="20" height="26" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="13" y1="18" x2="33" y2="18" stroke="#fff" stroke-width="1"/><line x1="13" y1="24" x2="33" y2="24" stroke="#fff" stroke-width="1"/><line x1="13" y1="30" x2="33" y2="30" stroke="#fff" stroke-width="1"/><line x1="21" y1="10" x2="21" y2="36" stroke="#fff" stroke-width="1"/></svg></div>
+        <div class="cert-info"><h4>Google Sheets</h4><div class="org">Google Cloud Security</div><div class="date">📅 Avril 2026</div><div class="cid">ID: L18VL3G1XM1X</div></div>
       </div>
-      <!-- IoT Yonsei -->
       <div class="cert-card reveal">
-        <div class="cert-logo">
-          <svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#003876"/><circle cx="23" cy="23" r="8" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="23" cy="23" r="3" fill="#fff"/><line x1="23" y1="10" x2="23" y2="15" stroke="#fff" stroke-width="1.5"/><line x1="23" y1="31" x2="23" y2="36" stroke="#fff" stroke-width="1.5"/><line x1="10" y1="23" x2="15" y2="23" stroke="#fff" stroke-width="1.5"/><line x1="31" y1="23" x2="36" y2="23" stroke="#fff" stroke-width="1.5"/></svg>
-        </div>
-        <div class="cert-info">
-          <h4>IoT (Internet of Things) + Wireless+</h4>
-          <div class="org">Yonsei University</div>
-          <div class="date">📅 Avril 2026</div>
-          <div class="cid">ID: GXEHMMPINJJS</div>
-        </div>
+        <div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#003876"/><circle cx="23" cy="23" r="9" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="23" cy="23" r="3" fill="#fff"/><line x1="23" y1="9" x2="23" y2="14" stroke="#fff" stroke-width="1.5"/><line x1="23" y1="32" x2="23" y2="37" stroke="#fff" stroke-width="1.5"/><line x1="9" y1="23" x2="14" y2="23" stroke="#fff" stroke-width="1.5"/><line x1="32" y1="23" x2="37" y2="23" stroke="#fff" stroke-width="1.5"/></svg></div>
+        <div class="cert-info"><h4>IoT (Internet of Things) + Wireless+</h4><div class="org">Yonsei University</div><div class="date">📅 Avril 2026</div><div class="cid">ID: GXEHMMPINJJS</div></div>
       </div>
-      <!-- GSMA -->
       <div class="cert-card reveal">
-        <div class="cert-logo">
-          <svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#00A651"/><text x="23" y="27" text-anchor="middle" font-size="11" font-family="sans-serif" font-weight="900" fill="#fff">GSMA</text></svg>
-        </div>
-        <div class="cert-info">
-          <h4>Les fondamentaux d'internet</h4>
-          <div class="org">GSMA</div>
-          <div class="date">📅 Avril 2026</div>
-          <div class="cid">ID: SKA245577404232026</div>
-        </div>
+        <div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#00A651"/><text x="23" y="27" text-anchor="middle" font-size="11" font-weight="900" font-family="sans-serif" fill="#fff">GSMA</text></svg></div>
+        <div class="cert-info"><h4>Les fondamentaux d'internet</h4><div class="org">GSMA</div><div class="date">📅 Avril 2026</div><div class="cid">ID: SKA245577404232026</div></div>
       </div>
-      <!-- Google Docs -->
       <div class="cert-card reveal">
-        <div class="cert-logo">
-          <svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#4285F4"/><rect x="14" y="10" width="18" height="22" rx="2" fill="#fff" opacity="0.2"/><rect x="14" y="10" width="18" height="22" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="17" y1="18" x2="29" y2="18" stroke="#fff" stroke-width="1.2"/><line x1="17" y1="22" x2="29" y2="22" stroke="#fff" stroke-width="1.2"/><line x1="17" y1="26" x2="24" y2="26" stroke="#fff" stroke-width="1.2"/><polygon points="28,7 32,7 32,11" fill="#fff" opacity="0.7"/></svg>
-        </div>
-        <div class="cert-info">
-          <h4>Google Docs</h4>
-          <div class="org">Google Cloud Skills Boost</div>
-          <div class="date">📅 Avril 2026</div>
-          <div class="cid">ID: NJWYXAJ8LMJS</div>
-        </div>
+        <div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#4285F4"/><rect x="14" y="10" width="18" height="22" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="17" y1="18" x2="29" y2="18" stroke="#fff" stroke-width="1.2"/><line x1="17" y1="22" x2="29" y2="22" stroke="#fff" stroke-width="1.2"/><line x1="17" y1="26" x2="24" y2="26" stroke="#fff" stroke-width="1.2"/><polygon points="28,7 32,7 32,11" fill="#fff" opacity="0.8"/></svg></div>
+        <div class="cert-info"><h4>Google Docs</h4><div class="org">Google Cloud Skills Boost</div><div class="date">📅 Avril 2026</div><div class="cid">ID: NJWYXAJ8LMJS</div></div>
       </div>
-      <!-- OIF -->
       <div class="cert-card reveal">
-        <div class="cert-logo">
-          <svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#003087"/><text x="23" y="20" text-anchor="middle" font-size="9" font-family="sans-serif" font-weight="700" fill="#fff">OIF</text><text x="23" y="32" text-anchor="middle" font-size="7" font-family="sans-serif" fill="#93c5fd">Francophonie</text></svg>
-        </div>
-        <div class="cert-info">
-          <h4>Marketing Numérique</h4>
-          <div class="org">Organisation Internationale de la Francophonie</div>
-          <div class="date">📅 Septembre 2025</div>
-          <div class="cid">ID: x9no3c0Csz</div>
-        </div>
+        <div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#003087"/><text x="23" y="21" text-anchor="middle" font-size="10" font-weight="900" font-family="sans-serif" fill="#fff">OIF</text><text x="23" y="33" text-anchor="middle" font-size="6.5" font-family="sans-serif" fill="#93c5fd">Francophonie</text></svg></div>
+        <div class="cert-info"><h4>Marketing Numérique</h4><div class="org">Organisation Internationale de la Francophonie</div><div class="date">📅 Septembre 2025</div><div class="cid">ID: x9no3c0Csz</div></div>
       </div>
     </div>
   </div>
@@ -486,11 +518,7 @@
         <p class="ref-text">Mohamed Saïd est un technicien sérieux et très compétent. Sa maîtrise des réseaux informatiques et son sens des responsabilités en font un professionnel de confiance. Il sait gérer des situations complexes avec calme et efficacité. Je le recommande sans hésitation pour tout poste en administration réseau ou support IT.</p>
         <div class="ref-person">
           <div class="ref-avatar">JD</div>
-          <div>
-            <div class="ref-name">Mr Junior DONOUMASSOU</div>
-            <div class="ref-role">Administrateur Réseau – CMACGM</div>
-            <div class="ref-tel">📞 +229 01 66 99 32 36</div>
-          </div>
+          <div><div class="ref-name">Mr Junior DONOUMASSOU</div><div class="ref-role">Administrateur Réseau – CMACGM</div><div class="ref-tel">📞 +229 01 66 99 32 36</div></div>
         </div>
       </div>
       <div class="ref-card reveal">
@@ -498,11 +526,7 @@
         <p class="ref-text">Durant son stage au sein de notre équipe IT chez OURANOS LTD, Mohamed Saïd a fait preuve d'un professionnalisme remarquable. Réactif, rigoureux et toujours disponible pour les utilisateurs, il a su s'intégrer rapidement et apporter une vraie valeur ajoutée à notre helpdesk. Un élément fiable sur qui on peut compter.</p>
         <div class="ref-person">
           <div class="ref-avatar">AA</div>
-          <div>
-            <div class="ref-name">Mr Aurel AKUESON</div>
-            <div class="ref-role">Superviseur IT Helpdesk – OURANOS LTD / MTN BENIN</div>
-            <div class="ref-tel">📞 +229 01 61 11 03 35</div>
-          </div>
+          <div><div class="ref-name">Mr Aurel AKUESON</div><div class="ref-role">Superviseur IT Helpdesk – OURANOS LTD / MTN BENIN</div><div class="ref-tel">📞 +229 01 61 11 03 35</div></div>
         </div>
       </div>
     </div>
@@ -525,6 +549,7 @@
           <a href="tel:+22901966011 58" class="contact-item"><div class="ico">📞</div><div><div class="clabel">Téléphone</div><div class="cval">+229 01 96 60 11 58</div></div></a>
           <a href="tel:+22901604063 65" class="contact-item"><div class="ico">📞</div><div><div class="clabel">Téléphone 2</div><div class="cval">+229 01 60 40 63 65</div></div></a>
           <a href="mailto:mouabi16@gmail.com" class="contact-item"><div class="ico">✉️</div><div><div class="clabel">Email</div><div class="cval">mouabi16@gmail.com</div></div></a>
+          <a href="https://www.linkedin.com/in/mohamed-sa%C3%AFd-fumilayo-ouabi-2a7329189/" target="_blank" class="contact-item"><div class="ico" style="background:#0077B5;color:#fff;font-size:.7rem;font-weight:900">in</div><div><div class="clabel">LinkedIn</div><div class="cval">Mohamed Saïd Fumilayo OUABI</div></div></a>
           <div class="contact-item"><div class="ico">📍</div><div><div class="clabel">Localisation</div><div class="cval">Akpakpa, Cotonou, Bénin 🇧🇯</div></div></div>
         </div>
       </div>
@@ -556,6 +581,14 @@
 </footer>
 
 <script>
+// LOADER
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('hide');
+    setTimeout(()=>document.getElementById('loader').style.display='none',500);
+  },2200);
+});
+
 // CANVAS PARTICLES
 const canvas=document.getElementById('bgCanvas');
 const ctx=canvas.getContext('2d');
@@ -566,7 +599,7 @@ window.addEventListener('resize',()=>{resize();createParticles();});
 function createParticles(){
   particles=[];
   const count=Math.floor((canvas.width*canvas.height)/18000);
-  for(let i=0;i<count;i++){
+  for(let i=0;i<Math.min(count,60);i++){
     particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+.5,dx:(Math.random()-.5)*.35,dy:(Math.random()-.5)*.35,alpha:Math.random()*.4+.1});
   }
 }
@@ -584,10 +617,7 @@ function drawParticles(){
     for(let j=i+1;j<particles.length;j++){
       const p2=particles[j];
       const d=Math.hypot(p.x-p2.x,p.y-p2.y);
-      if(d<130){
-        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);
-        ctx.strokeStyle=`rgba(${c},${.08*(1-d/130)})`;ctx.lineWidth=.5;ctx.stroke();
-      }
+      if(d<130){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.strokeStyle=`rgba(${c},${.07*(1-d/130)})`;ctx.lineWidth=.5;ctx.stroke();}
     }
   });
   requestAnimationFrame(drawParticles);
