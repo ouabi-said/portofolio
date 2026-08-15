@@ -88,16 +88,15 @@
     .orbit-ring-1{width:270px;height:270px;animation-duration:12s}
     .orbit-ring-2{width:315px;height:315px;animation-duration:20s;animation-direction:reverse}
     @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-    .orbit-logo{position:absolute;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.15);animation:counterSpin linear infinite;overflow:hidden}
-    .orbit-logo-r1{animation-duration:12s}
-    .orbit-logo-r2{animation-duration:20s;animation-direction:reverse}
+    .orbit-logo{position:absolute;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.15);overflow:hidden}
+    .orbit-logo-r1{animation:counterSpin 12s linear infinite}
+    .orbit-logo-r2{animation:counterSpin2 20s linear infinite}
     @keyframes counterSpin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
-    /* Ring 1 positions */
-    .r1-top{position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(-19px)}
-    .r1-bot{position:absolute;bottom:0;left:50%;transform:translateX(-50%) translateY(19px)}
-    /* Ring 2 positions */
-    .r2-top{position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(-19px)}
-    .r2-bot{position:absolute;bottom:0;left:50%;transform:translateX(-50%) translateY(19px)}
+    @keyframes counterSpin2{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .r1-top{position:absolute;top:0;left:50%;margin-left:-19px;margin-top:-19px}
+    .r1-bot{position:absolute;bottom:0;left:50%;margin-left:-19px;margin-bottom:-19px}
+    .r2-top{position:absolute;top:0;left:50%;margin-left:-19px;margin-top:-19px}
+    .r2-bot{position:absolute;bottom:0;left:50%;margin-left:-19px;margin-bottom:-19px}
 
     .hero-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.6rem;width:240px;box-shadow:0 20px 60px var(--shadow);position:relative;z-index:2}
     .hero-card::before{content:'';position:absolute;inset:-1px;border-radius:20px;background:linear-gradient(135deg,rgba(8,145,178,.2),rgba(14,116,144,.2));z-index:-1}
@@ -182,7 +181,6 @@
     .tlc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem;transition:border-color .2s,box-shadow .2s,transform .2s}
     .tlc:hover{border-color:var(--accent);box-shadow:0 6px 20px var(--shadow);transform:translateX(4px)}
     .tl-company{font-size:.78rem;color:var(--muted);margin-bottom:.3rem;font-weight:500}
-    .tl-location{font-size:.72rem;color:var(--muted)}
     .tlh{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.4rem;margin-bottom:.4rem}
     .tlt{font-weight:700;font-size:1rem;color:var(--text)}
     .tlco{color:var(--accent);font-size:.82rem;margin-top:.1rem;font-weight:600}
@@ -243,7 +241,7 @@
     .footer-contact-quick{display:flex;flex-direction:column;gap:.5rem}
     .footer-contact-quick .fci{display:flex;align-items:center;gap:.5rem;color:var(--muted);font-size:.82rem}
     .footer-contact-quick .fci span:first-child{color:var(--accent)}
-    .footer-bottom{max-width:1100px;margin:0 auto;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:center;align-items:center}
+    .footer-bottom{max-width:1100px;margin:0 auto;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:center}
     .footer-copy{color:var(--muted);font-size:.78rem;text-align:center}
 
     /* SCROLL TO TOP */
@@ -269,8 +267,6 @@
 </div>
 
 <canvas id="bgCanvas"></canvas>
-
-<!-- SCROLL TO TOP -->
 <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <nav>
@@ -300,27 +296,25 @@
       <div class="hero-badge">Disponible pour tout projet</div>
       <h1 class="hero">Bonjour, je suis<br><span>Saïd OUABI</span></h1>
       <div class="typed-wrapper"><span id="typed"></span></div>
-      <p class="hero-desc">Technicien support informatique et réseaux télécoms basé à Cotonou, je me spécialise dans le helpdesk, le déploiement d'infrastructures IT et la gestion de projets. Mon expérience terrain variée fait de moi un professionnel polyvalent et réactif. Passionné par les technologies de l'information au Bénin, je m'engage à apporter des solutions concrètes et efficaces à chaque mission.</p>
+      <p class="hero-desc">Technicien support informatique et réseaux télécoms basé à Cotonou, je me spécialise dans le helpdesk N1/N2, le déploiement d'infrastructures IT et la gestion de projets. Mon expérience terrain variée fait de moi un professionnel polyvalent et réactif. Passionné par les technologies de l'information au Bénin, je m'engage à apporter des solutions concrètes et efficaces à chaque mission.</p>
       <div class="hero-btns">
         <a href="#experience" class="btn btn-primary">Voir mes expériences</a>
         <a href="#contact" class="btn btn-outline">Travailler ensemble</a>
       </div>
       <div class="hero-social">
         <a href="https://www.linkedin.com/in/mohamed-sa%C3%AFd-fumilayo-ouabi-2a7329189/" target="_blank" class="linkedin-btn">
-          <div class="linkedin-icon"><span>in</span></div>
-          LinkedIn
+          <div class="linkedin-icon"><span>in</span></div>LinkedIn
         </a>
       </div>
       <div class="hero-counters">
         <div class="counter"><div class="num" data-target="3">0</div><div class="lbl">Ans d'expérience</div></div>
-        <div class="counter"><div class="num" data-target="8">0</div><div class="lbl">Postes occupés</div></div>
-        <div class="counter"><div class="num" data-target="6">0</div><div class="lbl">Certifications</div></div>
+        <div class="counter"><div class="num" data-target="9">0</div><div class="lbl">Postes occupés</div></div>
+        <div class="counter"><div class="num" data-target="8">0</div><div class="lbl">Certifications</div></div>
         <div class="counter"><div class="num" data-target="3">0</div><div class="lbl">Langues</div></div>
       </div>
     </div>
     <div class="hero-right-wrap">
       <div class="hero-card-wrap">
-        <!-- Orbit Ring 1 -->
         <div class="orbit-ring orbit-ring-1">
           <div class="orbit-logo orbit-logo-r1 r1-top" style="background:linear-gradient(135deg,#4285F4,#34A853)">
             <svg width="22" height="22" viewBox="0 0 22 22"><text x="11" y="16" text-anchor="middle" font-size="14" font-weight="900" font-family="sans-serif" fill="#fff">G</text></svg>
@@ -329,7 +323,6 @@
             <svg width="22" height="22" viewBox="0 0 22 22"><text x="11" y="15" text-anchor="middle" font-size="7" font-weight="900" font-family="sans-serif" fill="#1a1a1a">MTN</text></svg>
           </div>
         </div>
-        <!-- Orbit Ring 2 -->
         <div class="orbit-ring orbit-ring-2">
           <div class="orbit-logo orbit-logo-r2 r2-top" style="background:linear-gradient(135deg,#0082CB,#005a8e)">
             <svg width="22" height="22" viewBox="0 0 22 22"><text x="11" y="15" text-anchor="middle" font-size="6.5" font-weight="900" font-family="sans-serif" fill="#fff">ERI</text></svg>
@@ -338,13 +331,12 @@
             <svg width="22" height="22" viewBox="0 0 22 22"><text x="11" y="15" text-anchor="middle" font-size="7" font-weight="900" font-family="sans-serif" fill="#fff">OIF</text></svg>
           </div>
         </div>
-        <!-- Hero Card -->
         <div class="hero-card">
           <div class="hc-avatar">OMSF</div>
           <div class="hc-name">Mohamed Saïd F. OUABI</div>
           <div class="hc-role">Technicien IT & Gestionnaire de Projet</div>
           <div class="hc-tags">
-            <span class="hc-tag">Support utilisateurs</span>
+            <span class="hc-tag">Support N1/N2</span>
             <span class="hc-tag">Réseaux</span>
             <span class="hc-tag">Gestion Projet</span>
           </div>
@@ -358,7 +350,6 @@
       </div>
     </div>
   </div>
-  <!-- SCROLL DOWN -->
   <a href="#apropos" class="scroll-down">
     <span>Défiler</span>
     <div class="arrow">↓</div>
@@ -398,7 +389,7 @@
           <div class="ainfo"><span class="ic">📞</span><span class="vl">+229 01 96 60 11 58</span></div>
           <div class="ainfo"><span class="ic">✉️</span><span class="vl">mouabi16@gmail.com</span></div>
           <div class="ainfo"><span class="ic">🚗</span><span class="vl">Permis B</span></div>
-          <div class="ainfo"><span class="ic">💼</span><span class="vl">Disponible immédiatement</span></div>
+          <div class="ainfo"><span class="ic">💼</span><span class="vl">En poste · Disponible</span></div>
         </div>
         <div class="sub-title">Langues</div>
         <div class="lang-items">
@@ -433,18 +424,18 @@
       <button class="filter-btn" onclick="filterSkills('projet',this)">Gestion Projet</button>
     </div>
     <div class="skills-grid reveal">
-      <div class="skill-item" data-cat="support"><div class="skill-header"><span class="skill-name">🖥️ Support utilisateurs</span><div class="skill-right"><span class="skill-level level-expert">Expert</span><span class="skill-pct">90%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
+      <div class="skill-item" data-cat="support"><div class="skill-header"><span class="skill-name">🖥️ Support N1 & N2</span><div class="skill-right"><span class="skill-level level-expert">Expert</span><span class="skill-pct">90%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
       <div class="skill-item" data-cat="support"><div class="skill-header"><span class="skill-name">🗂️ Active Directory & GPO</span><div class="skill-right"><span class="skill-level level-avance">Avancé</span><span class="skill-pct">80%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
       <div class="skill-item" data-cat="support"><div class="skill-header"><span class="skill-name">💻 Windows 10/11</span><div class="skill-right"><span class="skill-level level-expert">Expert</span><span class="skill-pct">88%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="88"></div></div></div>
       <div class="skill-item" data-cat="support"><div class="skill-header"><span class="skill-name">🖨️ Maintenance Imprimantes</span><div class="skill-right"><span class="skill-level level-avance">Avancé</span><span class="skill-pct">85%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
-      <div class="skill-item" data-cat="reseau"><div class="skill-header"><span class="skill-name">📡 monitoring BTS/2G/3G/4G</span><div class="skill-right"><span class="skill-level level-avance">Avancé</span><span class="skill-pct">78%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div></div>
+      <div class="skill-item" data-cat="reseau"><div class="skill-header"><span class="skill-name">📡 BTS 2G/3G/4G</span><div class="skill-right"><span class="skill-level level-avance">Avancé</span><span class="skill-pct">78%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div></div>
       <div class="skill-item" data-cat="reseau"><div class="skill-header"><span class="skill-name">🔌 Fibre Optique & Câblage</span><div class="skill-right"><span class="skill-level level-avance">Avancé</span><span class="skill-pct">82%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="82"></div></div></div>
       <div class="skill-item" data-cat="reseau"><div class="skill-header"><span class="skill-name">💳 TPE / Mobile Money</span><div class="skill-right"><span class="skill-level level-expert">Expert</span><span class="skill-pct">85%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
       <div class="skill-item" data-cat="outils"><div class="skill-header"><span class="skill-name">🔭 SolarWinds / Orion</span><div class="skill-right"><span class="skill-level level-inter">Intermédiaire</span><span class="skill-pct">75%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
       <div class="skill-item" data-cat="outils"><div class="skill-header"><span class="skill-name">📊 Kibana / iMaster / ENM</span><div class="skill-right"><span class="skill-level level-inter">Intermédiaire</span><span class="skill-pct">72%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="72"></div></div></div>
       <div class="skill-item" data-cat="outils"><div class="skill-header"><span class="skill-name">📁 Pack Office & MS Project</span><div class="skill-right"><span class="skill-level level-avance">Avancé</span><span class="skill-pct">85%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
-      <div class="skill-item" data-cat="projet"><div class="skill-header"><span class="skill-name">📋 Redaction de projet</span><div class="skill-right"><span class="skill-level level-avance">Avancé</span><span class="skill-pct">80%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
-      <div class="skill-item" data-cat="projet"><div class="skill-header"><span class="skill-name">👥 Management d'équipes</span><div class="skill-right"><span class="skill-level level-avance">Avancé</span><span class="skill-pct">78%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div></div>
+      <div class="skill-item" data-cat="projet"><div class="skill-header"><span class="skill-name">📋 Gestion de Projet</span><div class="skill-right"><span class="skill-level level-avance">Avancé</span><span class="skill-pct">80%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
+      <div class="skill-item" data-cat="projet"><div class="skill-header"><span class="skill-name">👥 Management d'équipe</span><div class="skill-right"><span class="skill-level level-avance">Avancé</span><span class="skill-pct">78%</span></div></div><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div></div>
     </div>
   </div>
 </div>
@@ -464,48 +455,68 @@
     </div>
     <div class="tab-content active" id="tab-exp">
       <div class="tl">
+
+        <!-- CONCENTRIX -->
+        <div class="tli reveal"><div class="tl-dot"></div><div class="tlc">
+          <div class="tl-company">CONCENTRIX · Cotonou, Bénin</div>
+          <div class="tlh"><div><div class="tlt">Stagiaire Conseiller Client – Assistant Technique Home</div><div class="tlco">CONCENTRIX</div></div><span class="tld">Juillet 2026 – En cours</span></div>
+          <ul class="tll">
+            <li>Assistance technique aux clients à domicile</li>
+            <li>Résolution d'incidents et support utilisateur</li>
+            <li>Conseil et accompagnement client</li>
+          </ul>
+          <div class="tl-tags"><span class="tl-tag">Support client</span><span class="tl-tag">Assistance technique</span><span class="tl-tag">En cours</span></div>
+        </div></div>
+
         <div class="tli reveal"><div class="tl-dot"></div><div class="tlc">
           <div class="tl-company">Fedpay · Natitingou, Bénin</div>
           <div class="tlh"><div><div class="tlt">Technicien Maintenance Informatique</div><div class="tlco">Fedpay</div></div><span class="tld">Juin – Juil. 2025 · 2 mois</span></div>
           <ul class="tll"><li>Déploiement de terminaux de paiement électronique (TPE)</li><li>Assistance aux marchands et formation de base</li><li>Support et résolution d'incidents Mobile Money</li></ul>
           <div class="tl-tags"><span class="tl-tag">TPE</span><span class="tl-tag">Mobile Money</span></div>
         </div></div>
+
         <div class="tli reveal"><div class="tl-dot"></div><div class="tlc">
           <div class="tl-company">FAI & Fils · Cotonou, Bénin</div>
           <div class="tlh"><div><div class="tlt">Technicien Support Informatique</div><div class="tlco">FAI & Fils</div></div><span class="tld">Avr. 2024 – Jan. 2025 · 10 mois</span></div>
           <ul class="tll"><li>Support informatique utilisateurs</li><li>Maintenance des imprimantes et photocopieuses</li><li>Renouvellement du matériel d'impression</li><li>Mise en place du réseau informatique</li></ul>
           <div class="tl-tags"><span class="tl-tag">Helpdesk</span><span class="tl-tag">Réseau</span><span class="tl-tag">Maintenance</span></div>
         </div></div>
+
         <div class="tli reveal"><div class="tl-dot"></div><div class="tlc">
           <div class="tl-company">ERICSSON – MTN BENIN · Cotonou, Bénin</div>
           <div class="tlh"><div><div class="tlt">Technicien Front Office</div><div class="tlco">ERICSSON – MTN BENIN</div></div><span class="tld">Nov. 2022 – Juil. 2023 · 9 mois</span></div>
           <ul class="tll"><li>Supervision en temps réel des sites BTS 2G/3G/4G</li><li>Détection et remontée des alertes réseau</li><li>Support au dépannage lors d'incidents réseau</li><li>Tests alarmes sites & reporting horaire du trafic</li></ul>
           <div class="tl-tags"><span class="tl-tag">BTS 4G</span><span class="tl-tag">Monitoring</span><span class="tl-tag">Ericsson</span></div>
         </div></div>
+
         <div class="tli reveal"><div class="tl-dot"></div><div class="tlc">
           <div class="tl-company">OURANOS LTD – MTN BENIN · Cotonou</div>
           <div class="tlh"><div><div class="tlt">Stagiaire IT Support Utilisateur</div><div class="tlco">OURANOS LTD – MTN BENIN</div></div><span class="tld">Juil. – Nov. 2022 · 5 mois</span></div>
           <ul class="tll"><li>Helpdesk et assistance technique</li><li>Installation et configuration Windows 10 / PC HP</li><li>Monitoring serveur, fibre optique et liens EBU</li><li>Gestion GPO, Active Directory, câblage réseau</li></ul>
           <div class="tl-tags"><span class="tl-tag">Active Directory</span><span class="tl-tag">GPO</span><span class="tl-tag">Windows</span></div>
         </div></div>
+
         <div class="tli reveal"><div class="tl-dot"></div><div class="tlc">
           <div class="tl-company">COGITHECH · Cotonou, Bénin</div>
           <div class="tlh"><div><div class="tlt">Stage Technicien Infogérance</div><div class="tlco">COGITHECH</div></div><span class="tld">Mai – Juil. 2022 · 3 mois</span></div>
           <ul class="tll"><li>Maintenance des imprimantes ORABANK</li><li>Déploiement réseau fibre (salle Gouv NSS)</li><li>Installation et configuration de matériels informatiques</li></ul>
           <div class="tl-tags"><span class="tl-tag">Fibre</span><span class="tl-tag">Infogérance</span></div>
         </div></div>
+
         <div class="tli reveal"><div class="tl-dot"></div><div class="tlc">
           <div class="tl-company">COMTEL GROUP · Cotonou, Bénin</div>
           <div class="tlh"><div><div class="tlt">Stagiaire Technicien Réseau</div><div class="tlco">COMTEL GROUP</div></div><span class="tld">Déc. 2021 – Mai 2022 · 6 mois</span></div>
           <ul class="tll"><li>Participation à des projets pour institutions publiques et privées</li><li>Maintenance des serveurs, caméras et postes informatiques</li><li>Déploiement fibre optique</li></ul>
           <div class="tl-tags"><span class="tl-tag">Réseau</span><span class="tl-tag">Fibre</span></div>
         </div></div>
+
         <div class="tli reveal"><div class="tl-dot"></div><div class="tlc">
           <div class="tl-company">BELMO SERVICES · Cotonou, Bénin</div>
           <div class="tlh"><div><div class="tlt">Caissier Mobile Money</div><div class="tlco">BELMO SERVICES</div></div><span class="tld">Mai – Août 2021 · 4 mois</span></div>
           <ul class="tll"><li>Opérations d'activations de services Mobile Money pour les réseaux mobiles</li></ul>
           <div class="tl-tags"><span class="tl-tag">Mobile Money</span><span class="tl-tag">Service client</span></div>
         </div></div>
+
         <div class="tli reveal"><div class="tl-dot"></div><div class="tlc">
           <div class="tl-company">OCTOGONE Trading Oil S.A. · Cotonou, Bénin</div>
           <div class="tlh"><div><div class="tlt">Stagiaire Assistant Administrateur Réseaux</div><div class="tlco">OCTOGONE Trading Oil S.A.</div></div><span class="tld">Déc. 2020 – Mar. 2021 · 4 mois</span></div>
@@ -514,6 +525,7 @@
         </div></div>
       </div>
     </div>
+
     <div class="tab-content" id="tab-edu">
       <div class="tl">
         <div class="tli"><div class="tl-dot"></div><div class="tlc">
@@ -542,6 +554,7 @@
         </div></div>
       </div>
     </div>
+
     <div class="tab-content" id="tab-civic">
       <div class="tl">
         <div class="tli"><div class="tl-dot"></div><div class="tlc">
@@ -576,11 +589,21 @@
       <p class="sec-sub">Certifications reconnues internationalement</p>
     </div>
     <div class="cert-grid">
+      <!-- Google Technical Support -->
       <div class="cert-card reveal"><div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#fff" stroke="#e5e7eb" stroke-width="1"/><text x="10" y="30" font-size="22" font-weight="900" font-family="sans-serif"><tspan fill="#4285F4">G</tspan></text><circle cx="34" cy="12" r="6" fill="#EA4335"/><circle cx="34" cy="12" r="3" fill="#fff"/></svg></div><div class="cert-info"><h4>Technical Support Fundamentals</h4><div class="org">Google</div><div class="date">📅 Mai 2026</div><div class="cid">ID: PW16VQUDG5VB</div></div></div>
+      <!-- System Administration -->
+      <div class="cert-card reveal"><div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#fff" stroke="#e5e7eb" stroke-width="1"/><text x="10" y="30" font-size="22" font-weight="900" font-family="sans-serif"><tspan fill="#4285F4">G</tspan></text><circle cx="34" cy="12" r="6" fill="#34A853"/><circle cx="34" cy="12" r="3" fill="#fff"/></svg></div><div class="cert-info"><h4>System Administration and IT Infrastructure Services</h4><div class="org">Google</div><div class="date">📅 Août 2026</div><div class="cid">ID: YLY7YO3A5RD1</div></div></div>
+      <!-- Operating Systems -->
+      <div class="cert-card reveal"><div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#fff" stroke="#e5e7eb" stroke-width="1"/><text x="10" y="30" font-size="22" font-weight="900" font-family="sans-serif"><tspan fill="#4285F4">G</tspan></text><circle cx="34" cy="12" r="6" fill="#FBBC04"/><circle cx="34" cy="12" r="3" fill="#fff"/></svg></div><div class="cert-info"><h4>Operating Systems and You : Becoming a Power User</h4><div class="org">Google</div><div class="date">📅 Juin 2026</div><div class="cid">ID: PTMOF12XUUDE</div></div></div>
+      <!-- Google Sheets -->
       <div class="cert-card reveal"><div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#0F9D58"/><rect x="13" y="10" width="20" height="26" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="13" y1="18" x2="33" y2="18" stroke="#fff" stroke-width="1"/><line x1="13" y1="24" x2="33" y2="24" stroke="#fff" stroke-width="1"/><line x1="13" y1="30" x2="33" y2="30" stroke="#fff" stroke-width="1"/><line x1="21" y1="10" x2="21" y2="36" stroke="#fff" stroke-width="1"/></svg></div><div class="cert-info"><h4>Google Sheets</h4><div class="org">Google Cloud Security</div><div class="date">📅 Avril 2026</div><div class="cid">ID: L18VL3G1XM1X</div></div></div>
+      <!-- IoT Yonsei -->
       <div class="cert-card reveal"><div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#003876"/><circle cx="23" cy="23" r="9" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="23" cy="23" r="3" fill="#fff"/><line x1="23" y1="9" x2="23" y2="14" stroke="#fff" stroke-width="1.5"/><line x1="23" y1="32" x2="23" y2="37" stroke="#fff" stroke-width="1.5"/><line x1="9" y1="23" x2="14" y2="23" stroke="#fff" stroke-width="1.5"/><line x1="32" y1="23" x2="37" y2="23" stroke="#fff" stroke-width="1.5"/></svg></div><div class="cert-info"><h4>IoT (Internet of Things) + Wireless+</h4><div class="org">Yonsei University</div><div class="date">📅 Avril 2026</div><div class="cid">ID: GXEHMMPINJJS</div></div></div>
+      <!-- GSMA -->
       <div class="cert-card reveal"><div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#00A651"/><text x="23" y="27" text-anchor="middle" font-size="11" font-weight="900" font-family="sans-serif" fill="#fff">GSMA</text></svg></div><div class="cert-info"><h4>Les fondamentaux d'internet</h4><div class="org">GSMA</div><div class="date">📅 Avril 2026</div><div class="cid">ID: SKA245577404232026</div></div></div>
+      <!-- Google Docs -->
       <div class="cert-card reveal"><div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#4285F4"/><rect x="14" y="10" width="18" height="22" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="17" y1="18" x2="29" y2="18" stroke="#fff" stroke-width="1.2"/><line x1="17" y1="22" x2="29" y2="22" stroke="#fff" stroke-width="1.2"/><line x1="17" y1="26" x2="24" y2="26" stroke="#fff" stroke-width="1.2"/><polygon points="28,7 32,7 32,11" fill="#fff" opacity="0.8"/></svg></div><div class="cert-info"><h4>Google Docs</h4><div class="org">Google Cloud Skills Boost</div><div class="date">📅 Avril 2026</div><div class="cid">ID: NJWYXAJ8LMJS</div></div></div>
+      <!-- OIF -->
       <div class="cert-card reveal"><div class="cert-logo"><svg width="46" height="46" viewBox="0 0 46 46"><rect width="46" height="46" rx="10" fill="#003087"/><text x="23" y="21" text-anchor="middle" font-size="10" font-weight="900" font-family="sans-serif" fill="#fff">OIF</text><text x="23" y="33" text-anchor="middle" font-size="6.5" font-family="sans-serif" fill="#93c5fd">Francophonie</text></svg></div><div class="cert-info"><h4>Marketing Numérique</h4><div class="org">Organisation Internationale de la Francophonie</div><div class="date">📅 Septembre 2025</div><div class="cid">ID: x9no3c0Csz</div></div></div>
     </div>
   </div>
@@ -658,7 +681,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="footer-logo-circle">OMSF</div>
-      <p>Technicien Support Informatique & Gestionnaire de Projet. Passionné par les technologies de l'information et les solutions numériques innovantes.</p>
+      <p>Technicien Support Informatique & Gestionnaire de Projet au Bénin. Passionné par les technologies de l'information et les solutions numériques innovantes.</p>
       <div class="footer-socials">
         <a href="https://www.linkedin.com/in/mohamed-sa%C3%AFd-fumilayo-ouabi-2a7329189/" target="_blank" class="footer-social-btn linkedin">in</a>
       </div>
@@ -741,7 +764,7 @@ function drawParticles(){
 drawParticles();
 
 // TYPED
-const words=['Technicien Support IT','Technicien Réseaux Télécoms','Gestionnaire de Projet','Spécialiste Helpdesk'];
+const words=['Technicien Support IT','Technicien Réseaux Télécoms','Gestionnaire de Projet','Conseiller Client Technique'];
 let wi=0,ci=0,del=false;
 const typedEl=document.getElementById('typed');
 function type(){
